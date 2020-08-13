@@ -8,6 +8,8 @@ import UserContext from '../../Context';
 
 const Employees = () => {
 
+   // <div class="text-center text-muted font-weight-light text-large">Loading projects!</div>
+
     //static contextType = UserContext;
     return (
     <PageLayout>

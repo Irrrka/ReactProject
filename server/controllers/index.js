@@ -3,5 +3,6 @@ const employee = require('./employee');
 
 module.exports = {
     user,
-    employee
+    employee,
+    nomination
 };

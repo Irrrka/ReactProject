@@ -5,8 +5,8 @@ const authLinks = [
     link: "/"
 },
 {
-    title: "Vote for your collegue",
-    link: `/vote`
+    title: "Nominate your collegue",
+    link: `/nominate`
 },
 {
     title: "Profile",

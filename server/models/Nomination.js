@@ -5,33 +5,21 @@ const { String, Number, Boolean, ObjectId, Date } = Schema.Types;
 
 const employeeSchema = new Schema({
 
-    email: {
+    // title:{
+    //     type: String
+    // },
+    description: {
         type: String,
         required: true
     },
-
-    position: {
-        type: String,
+    voteNumber:{
+        type: Number,
         required: true,
     },
-    startDate: {
-        type: Date,
-        required: true,
-    },
-    user: {
+    author: {
         type: ObjectId,
         ref: "User"
-    },
-    nominations: [{ type: ObjectId, ref: "Nomination" }],
-
-    // skills: {
-    //     type: String,
-    //     required: true,
-    // },
-    // companyExperience: {
-    //     type: Number,
-    //     required: true,
-    // },
+    }
 
 });
 

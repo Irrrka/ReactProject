@@ -32,6 +32,7 @@ const LoginPage = (props) => {
         <PageLayout>
         <form className={styles.container} onSubmit={this.handleSubmit}>
             <Title title="Login" />
+            <div>
             <Input 
                    value={email}
                    onChange={(e)=> handleChange(e, 'email')}
@@ -43,6 +44,7 @@ const LoginPage = (props) => {
                    label="Password"
                    id="password"/>
             <SubmitButton title="Login" />
+            </div>
         </form>
         </PageLayout>
     )

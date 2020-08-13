@@ -8,15 +8,21 @@ const { String, Number, Boolean, ObjectId } = Schema.Types;
 
 const userSchema = new Schema({
 
-    username: {
+    email: {
         type: String,
         unique: true,
         required: true
     },
+
     password: {
         type: String,
         require: true
     },
+
+    nominations: [{ type: ObjectId, ref: "Nomination" }],
+    createdNominations: [{ type: ObjectId, ref: "Nomination" }],
+    role: [{type: String}],
+    
     employee: { 
         type: ObjectId, 
         ref: "Employee" }

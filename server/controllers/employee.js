@@ -2,22 +2,35 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        const length = req.query.length ? parseInt(req.query.length) : 10
-        //todo user?
-        models.Employee.find().sort(-'created_at').limit(length).populate('user')
-            .then((employees) => res.send(employees))
+        models.Employee.find().populate('users').populate('nominations')
+            .then((employee) =>{
+                res.send(employee)
+            } )
             .catch(next);
     },
 
     post: (req, res, next) => {
-        const { position, companyExperience, startDate } = req.body;
+        const { client, username, email, time } = req.body;    //const { _id } = req.user;
+console.log(req.body)
+        models.Client.create({ client, username, email, time})
+            .then((client) => {
+      console.log('Inside', client, username, email, time)
+        
+               
+           
+            })
+            .catch(next);
+    },
+
+    post: (req, res, next) => {
+        const { email, position, startDate } = req.body;
         const { _id } = req.user;
 
-        models.Employee.create({ position, companyExperience, startDate, skills, user: _id })
-            .then((createdEmployee) => {
+        models.Employee.create({ email, position, startDate, user: _id })
+            .then((employee) => {
                 return Promise.all([
-                    models.User.updateOne({ _id }, { $push: { posts: createdEmployee } }),
-                    models.Employee.findOne({ _id: createdEmployee._id })
+                    models.User.updateOne({ _id }, { employee } ),
+                    models.Employee.findOne({ _id: employee._id })
                 ]);
             })
             .then(([modifiedObj, employeeObj]) => {
@@ -28,16 +41,16 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { position, skills } = req.body;
-        models.Employee.updateOne({ _id: id }, { position, skills })
-            .then((updatedEmployee) => res.send(updatedEmployee))
+        const { position } = req.body;
+        models.Employee.updateOne({ _id: id }, { position })
+            .then((updated) => res.send(updated))
             .catch(next)
     },
 
     delete: (req, res, next) => {
         const id = req.params.id;
         models.Employee.deleteOne({ _id: id })
-            .then((removedEmployee) => res.send(removedEmployee))
+            .then((removed) => res.send(removed))
             .catch(next)
     }
 };

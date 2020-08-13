@@ -10,8 +10,8 @@ const PageLayout = (props) => {
      <Header />
      <div className={styles.Container}>
        <Aside />
-       <div className={styles.innerContainer}>
-       {props.children}
+       <div className={styles.InnerContainer}>
+        {props.children}
        </div>
      </div>
      <Footer />

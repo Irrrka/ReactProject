@@ -7,3 +7,8 @@
     height: 100px;
     resize: none;
 }
+
+.note {
+    align-content: center;
+    color: red;
+}

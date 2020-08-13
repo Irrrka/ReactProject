@@ -27,6 +27,8 @@ const Employees = (props) => {
            },[props.UpdatedEmployee, getEmployees]);
 
     return (
+        // <div *ngFor="let project of projects" class="row">
+        //     </div>
         <div className={styles.Main}>
           <div className={styles.Posts}>
               {renderEmployees()}

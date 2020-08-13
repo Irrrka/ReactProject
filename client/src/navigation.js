@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 
 import HomePgae from './pages/home-page';
-import Vote from './pages/vote';
+import Vote from './pages/nominate';
 import RegisterPage from './pages/register';
 
 const Navigation = () => {
@@ -15,7 +15,7 @@ const Navigation = () => {
         <BrowserRouter>
         <Switch>
             <Route path="/" exact component={HomePgae}/>
-            <Route path="/share" component={Vote}/>
+            <Route path="/nominate" component={Vote}/>
             <Route path="/register" component={RegisterPage}/>
             <Route path="/login" component={LoginPage}/>
             <Route path="/profile/:userId" component={ProfilePage}/>

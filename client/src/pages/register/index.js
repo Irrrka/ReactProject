@@ -61,6 +61,7 @@ class RegisterPage extends Component {
             <PageLayout>
             <form className={styles.container}>
                 <Title title="Register" />
+                <div>
                 <Input value={email}
                        onChange={(e)=>this.onChange(e, 'email')}
                        label="Email"
@@ -75,6 +76,7 @@ class RegisterPage extends Component {
                        onChange={(e)=>this.onChange(e, 'rePassword')}
                        label="Re-Password"
                        id="re-password"/>
+                </div>
                 <SubmitButton title="Register" />
             </form>
             </PageLayout>

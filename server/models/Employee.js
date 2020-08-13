@@ -5,11 +5,14 @@ const { String, Number, Boolean, ObjectId, Date } = Schema.Types;
 
 const employeeSchema = new Schema({
 
+    name: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
     },
-
     position: {
         type: String,
         required: true,

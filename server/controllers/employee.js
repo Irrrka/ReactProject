@@ -23,10 +23,10 @@ console.log(req.body)
     },
 
     post: (req, res, next) => {
-        const { email, position, startDate } = req.body;
+        const { name, email, position, startDate } = req.body;
         const { _id } = req.user;
 
-        models.Employee.create({ email, position, startDate, user: _id })
+        models.Employee.create({ name, email, position, startDate, user: _id })
             .then((employee) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { employee } ),

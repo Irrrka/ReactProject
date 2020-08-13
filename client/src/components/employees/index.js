@@ -2,11 +2,10 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styles from './home-page.module.css';
 
 import { Component } from 'react';
-import Employee from '../employee';
+import Employee from '../../components/employee';
 
 const Employees = (props) => {
     const[employees, setEmployees] = useState();
-    //const[votes, setVotes] = useState();
 
     getEmployees = useCallback(async () => {
         const employees = await getEmployees(props.length);      
@@ -15,9 +14,9 @@ const Employees = (props) => {
 
       const renderEmployees = () => {
             const { employees } = this.state;
-            return employees.map((employee, index) => {
+            return employees.map((employee) => {
                 return (
-                   <Employee key={employee._id} index={index} {...employee}/>
+                   <Employee key={employee._id} {...employee}/>
                );
            })
       }
@@ -27,11 +26,11 @@ const Employees = (props) => {
            },[props.UpdatedEmployee, getEmployees]);
 
     return (
-        // <div *ngFor="let project of projects" class="row">
+        // <div class="row">
         //     </div>
         <div className={styles.Main}>
           <div className={styles.Posts}>
-              {renderEmployees()}
+              {renderEmployees}
           </div>
       </div>
   );

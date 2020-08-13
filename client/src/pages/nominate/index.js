@@ -7,7 +7,7 @@ import Origamis from '../../components/origamis'
 import SubmitButton from '../../components/button/submit-button'
 import getCookie from '../../utils/cookie'
 
-const Nominate = () => {
+const NominatePage = () => {
   const [nomination, setNomination] = useState('')
   const [voteNumber, setVoteNumber] = useState('')
   //const [updatedEmployee, setUpdatedEmployee] = useState([])
@@ -57,4 +57,4 @@ const Nominate = () => {
   )
 }
 
-export default Nominate
+export default NominatePage

@@ -3,11 +3,8 @@ const Schema = mongoose.Schema;
 const Model = mongoose.model;
 const { String, Number, Boolean, ObjectId, Date } = Schema.Types;
 
-const employeeSchema = new Schema({
+const nominationSchema = new Schema({
 
-    // title:{
-    //     type: String
-    // },
     description: {
         type: String,
         required: true
@@ -23,4 +20,4 @@ const employeeSchema = new Schema({
 
 });
 
-module.exports = new Model('Employee', employeeSchema);
+module.exports = new Model('Nomination', nominationSchema);

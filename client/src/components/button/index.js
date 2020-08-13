@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.module.css';
+import Button from '../button';
 
 const SubmitButton = ({title, onClick }) => {
   return (

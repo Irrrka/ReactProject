@@ -3,6 +3,7 @@ import Link from '../link/index';
 import styles from './index.module.css';
 import logo from '../../images/logo.svg';
 import getNavigation from '../../utils/navigation';
+import UserContext from '../../Context'
 
 
 class Header extends Component {

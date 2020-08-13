@@ -27,15 +27,6 @@ const employeeSchema = new Schema({
     },
     nominations: [{ type: ObjectId, ref: "Nomination" }],
 
-    // skills: {
-    //     type: String,
-    //     required: true,
-    // },
-    // companyExperience: {
-    //     type: Number,
-    //     required: true,
-    // },
-
 });
 
 module.exports = new Model('Employee', employeeSchema);

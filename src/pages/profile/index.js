@@ -19,7 +19,7 @@ const ProfilePage = () => {
   
   const getData = useCallback(async () => {
     const id = params.userid
-    const response = await fetch(`http://localhost:9999/api/user?id=${id}`)
+    const response = await fetch(`http://localhost:9000/api/user?id=${id}`)
 
     if(!response.ok) {
       history.push('/error')      

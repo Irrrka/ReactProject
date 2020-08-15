@@ -2,16 +2,16 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Employee.find().sort('-created_at').populate('nominations').populate('rating')
+        models.Employee.find().sort('-created_at').populate('nominations')
             .then((employees) => res.send(employees))
             .catch(next);
     },
 
     post: (req, res, next) => {
-        const { email, position, startDate } = req.body;
+        const { name, position, startDate } = req.body;
         const { _id } = req.user;
 
-        models.Employee.create({ email, position, startDate, user: _id })
+        models.Employee.create({ name, position, startDate, user: _id })
             .then((createdEmployee) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { employee: createdEmployee }),

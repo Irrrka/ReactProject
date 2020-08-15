@@ -19,7 +19,7 @@ const employeeSchema = new Schema({
 
     startDate: {
         type: Date,
-        required: true
+        required: false
     },
 
     nominations: [{ type: ObjectId, ref: "Nomination" }],

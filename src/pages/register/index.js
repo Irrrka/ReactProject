@@ -39,7 +39,7 @@ class RegisterPage extends Component {
         password
       }, (user) => {
         this.context.logIn(user)
-        this.props.history.push('/')
+        this.props.history.push('/create')
       }, (e) => {
         console.log('Error', e)
       }
@@ -62,7 +62,7 @@ class RegisterPage extends Component {
             <Input
               value={email}
               onChange={(e) => this.onChange(e, 'email')}
-              label="email"
+              label="Email"
               id="email"
             />
             <Input
@@ -76,7 +76,7 @@ class RegisterPage extends Component {
               type="password"
               value={rePassword}
               onChange={(e) => this.onChange(e, 'rePassword')}
-              label="Re-Password"
+              label="Repeat Password"
               id="re-password"
             />
             <SubmitButton title="Register" />

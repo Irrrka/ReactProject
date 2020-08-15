@@ -1,48 +1,69 @@
-// import React, { useState } from 'react'
-// import PageLayout from '../../components/page-layout'
-// import Title from '../../components/title'
-// import Employees from '../../components/employees'
-// import SubmitButton from '../../components/button'
-// import getCookie from '../../utils/cookie'
+import React, { useState } from 'react'
+import styles from './index.module.css'
+import PageLayout from '../../components/page-layout'
+import Title from '../../components/title'
+import SubmitButton from '../../components/button'
+import Input from '../../components/input'
 
-// const CreateEmployeePage = () => {
-//   const [name, setName] = useState('')
-//   const [position, setPosition] = useState('')
-//   const [updatedEmployees, setUpdatedEmployees] = useState([])
+import getCookie from '../../utils/cookie'
 
-//   const handleSubmit = async () => {
-//     await fetch('http://localhost:9999/api/employee', {
-//       method: 'POST',
-//       body: JSON.stringify({
-//         name: name,
-//         position: position
-//       }),
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': getCookie('x-auth-token')
-//       }
-//     })
+const CreateEmployeePage = () => {
+  const [name, setName] = useState('')
+  const [position, setPosition] = useState('')
+  const [startDate, setStartDate] = useState('')
+  const [updatedEmployees, setUpdatedEmployees] = useState([])
 
-//     setEmployees('')
-//     setUpdatedEmployees([...updatedEmployees, 1])
-//   }
+  const handleSubmit = async (user) => {
+    await fetch('http://localhost:9000/api/employee', {
+      method: 'POST',
+      body: JSON.stringify({
+        name: name,
+        position: position,
+        startDate: startDate,
+        user: user._id
+      }),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': getCookie('x-auth-token')
+      }
+    })
 
-//   return (
-//     <PageLayout>
-//       <Title title="Share your thoughts..." />
-//       <Container>
-//         <div>
-//           <TextArea value={publication} onChange={e => setPublication(e.target.value)} />
-//         </div>
-//         <div>
-//           <SubmitButton title="Post" onClick={handleSubmit} />
-//         </div>
-//       </Container>
-      
-//       <Origamis length={3} updatedOrigami={updatedOrigami} />
+    setName('')
+    setPosition('')
+    setStartDate('')
+    setUpdatedEmployees([...updatedEmployees, 1])
+  }
 
-//     </PageLayout>
-//   )
-// }
+  return (
+    <PageLayout>
+    <section className={styles.container}>
+     <Title title="Join Our Endorcement System" />
+   <form className={styles.container} onSubmit={handleSubmit}>
+   <fieldset>
+     <Input
+       value={name}
+       onChange={e => setName(e.target.value)}
+       label="Name"
+       id="name"
+     />
+       <Input
+       value={position}
+       onChange={e => setPosition(e.target.value)}
+       label="Position"
+       id="position"
+     />
+     <Input
+       value={startDate}
+       onChange={e => setStartDate(e.target.value)}
+       label="StartDate"
+       id="startDate"
+     />
+     <SubmitButton title="Join" />
+     </fieldset>
+   </form>
+   </section>
+ </PageLayout>
+  )
+}
 
-// export default CreateEmployeePage
+export default CreateEmployeePage

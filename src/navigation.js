@@ -21,7 +21,7 @@ const Navigation = () => {
   return (
     <Switch>
       <Route path="/" exact component={HomePage} />
-      <Route path="/share"> 
+      <Route path="/nominate"> 
         {loggedIn ? (<Nominate />): (<Redirect to="/login" />)}
       </Route>
       <Route path="/create"> 

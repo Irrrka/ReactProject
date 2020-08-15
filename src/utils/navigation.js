@@ -6,6 +6,10 @@ const getNavigation = (user) => {
       link: "/"
     },
     {
+      title: "Join",
+      link: "/create"
+    },
+    {
       title: "Nominate",
       link: "/nominate"
     },

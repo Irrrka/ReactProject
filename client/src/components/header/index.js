@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Link from '../link';
+import Nav from '../link';
 import styles from './index.module.css';
-import logo from '../../images/logo.svg';
+import logo from '../../images/spot.jpg';
 import getNavigation from '../../utils/navigation';
 import UserContext from '../../Context';
 
@@ -18,19 +18,21 @@ class Header extends Component {
     const links = getNavigation(loggedIn, user);
 
   return (
-    <header className={styles.Navigation}>
-      <img className={styles.logo} src={logo} />
-      {
-links.map(nav => {
-  return (
-    <Link key={nav.title} 
-    href={nav.link} 
-    title={nav.title} 
-    type="header"/>
-  )
-})
-      }
-    </header>
+    <header className={styles.navigation}>
+    <img alt="logo" className={styles.logo} src={logo} />
+    {
+      links.map(navElement => {
+        return (
+          <Nav
+            key={navElement.title}
+            href={navElement.link}
+            title={navElement.title}
+            type="header"
+          />
+        )
+      })
+    }
+  </header>
   );
 }
 }

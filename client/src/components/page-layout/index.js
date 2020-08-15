@@ -4,19 +4,19 @@ import styles from './index.module.css';
 import Aside from '../aside';
 import Footer from '../footer';
 
-const PageLayout = (props) => {
+const Container = (props) => {
   return (
     <div className={styles.App}>
-     <Header />
-     <div className={styles.Container}>
-       <Aside />
-       <div className={styles.InnerContainer}>
+    <Header />
+    {/* <div className={styles.Container}>
+      <Aside /> */}
+      <div className={styles.InnerContainer}>
         {props.children}
-       </div>
-     </div>
-     <Footer />
-    </div>
+      </div>
+    {/* </div> */}
+    <Footer />
+  </div>
   );
 }
 
-export default PageLayout;
+export default Container;

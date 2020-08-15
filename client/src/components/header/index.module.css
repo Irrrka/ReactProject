@@ -1,18 +1,22 @@
-/* Navigation Styles*/
-
-.Navigation {
+.navigation {
     width: 100%;
-    height: 14vh;
+    height: 16vh;
     background-color: #234465;
-    color: white;
+    color: blanchedalmond;
     position: fixed;
     top: 0;
-    border-bottom: 2px solid #ffa000;
-    border-top: 2px solid #ffa000;
-}
+  }
+  
+  .logo {
+    width: 100px;
+    height: 70px;
+    margin: 5px;
+  }
 
-.logo{
-    size: 40px;
-}
-
-/* Navigation Styles*/
+  .ul {
+    /* position: relative; */
+    justify-content: right;
+    /* overflow-y: hidden; */
+    margin: 0;
+    padding: 0;
+  }

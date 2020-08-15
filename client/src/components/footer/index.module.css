@@ -1,15 +1,20 @@
-.paragraph {
-    text-align: center;
-    font-weight: bold;;
+.Footer {
+    position: fixed;
+    width: 100%;
+    height: 10vh;
+    bottom: 0px;
+    background-color: #234465;
+    color: #f2f6fa;
+    border-top: 2px solid #234465;
+    border-bottom: 2px solid #234465;
+    margin-bottom: 1%;
 }
 
-.Footer {
-    width: 100%;
-    height: 14vh;
-    background-color: #234465;
-    color: white;
-    position: fixed;
-    top: 0;
-    border-bottom: 2px solid #ffa000;
-    border-top: 2px solid #ffa000;
+.p {
+    text-align: center;
 }
+  
+.university {
+    text-align: center;
+    font-weight: bold;
+  }

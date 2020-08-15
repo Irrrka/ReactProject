@@ -1,79 +1,26 @@
-/* Link Styles */
-
-.header-list-item {
-    color: white;
-    text-decoration: none;
-}
-
-.footer-list-item {
-    color: #234465;
-    text-decoration: none;
-}
-
-.header-list-item, .footer-list-item {
+.li {
     display: inline-block;
-    height: auto;
-    margin-right: 2%;
-    cursor: pointer;
-    padding: 0.5%;
-    margin: 0.1%;
-    vertical-align: top;
-}
-
-.footer-list-item:nth-child(1) {
-    margin-left: 1%;
-}
-
-.header-list-item:not(:first-child) {
-    padding: 2%;
-    margin-top: 1.5%;
-    border-top: 2px solid #ffa000;
-}
-
-.header-list-item:not(:last-child) {
-    padding: 2%;
-    margin-top: 1.5%;
-    border-bottom: 2px solid #234465;
-}
-
-.header-list-item:hover {
-    border-top: none;
-    border-bottom: 2px solid #ffa000;
-    font-weight: bold;
-}
-
-.footer-list-item:hover {
-    border-bottom: none;
-    border-top: 2px solid #234465;
-    font-weight: bold;
-}
-
-.aside-list-item {
-    display: block;
-    width: 98%;
-    border-left: 2px solid #234465;
-    border-right: 2px solid #234465;
-    margin-bottom: 11%;
-    height: 5vh;
-    text-align: center;
-}
-
-.aside-link {
-    color: #234465;
-    text-align: center;
     text-decoration: none;
-    padding-top: 5%;
-    height: 60%;
-    display: block;
+    align-self: center;  
+    text-align: right;
+    /* padding: 5px; */
+    padding: 0.6rem 1rem;
+    border-radius: 0.4rem;
+    margin-right: 5px;
+    /* background-color: #234465; */
+    width: 150px;
+    height: 20px;
+    cursor: pointer;
+    font: 1.2rem bold;
 }
 
-.aside-list-item:hover {
-    border-left: none;
-    border-right: none;
+.a {
+    text-decoration: none;
+    color: blanchedalmond;
+}
+
+.li:hover {
+    /* background: #234465; */
+    color: rgb(0, 0, 0);
     font-weight: bold;
-    border-top: 2px solid #234465;
-    border-bottom: 2px solid #234465;
-    color: #ffa000;
 }
-
-/* Link Styles */

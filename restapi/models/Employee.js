@@ -5,7 +5,7 @@ const { String, Number, Boolean, ObjectId } = Schema.Types;
 
 const employeeSchema = new Schema({
 
-    username: {
+    name: {
         type: String,
         unique: true,
         required: true

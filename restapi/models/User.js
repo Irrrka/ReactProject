@@ -8,7 +8,7 @@ const { String, ObjectId } = Schema.Types;
 
 const userSchema = new Schema({
 
-    username: {
+    email: {
         type: String,
         unique: true,
         required: true

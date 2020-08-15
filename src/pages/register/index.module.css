@@ -1,4 +1,8 @@
 
 .container {
   text-align: center;
+    margin: auto;
+    width: 400px;
+    height: auto;
 }
+

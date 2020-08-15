@@ -1,20 +1,21 @@
 // import React, { useState } from 'react'
-// import styled from 'styled-components'
 // import PageLayout from '../../components/page-layout'
 // import Title from '../../components/title'
 // import Employees from '../../components/employees'
 // import SubmitButton from '../../components/button'
 // import getCookie from '../../utils/cookie'
 
-// const Nominate = () => {
-//   const [publication, setPublication] = useState('')
+// const CreateEmployeePage = () => {
+//   const [name, setName] = useState('')
+//   const [position, setPosition] = useState('')
 //   const [updatedEmployees, setUpdatedEmployees] = useState([])
 
 //   const handleSubmit = async () => {
 //     await fetch('http://localhost:9999/api/employee', {
 //       method: 'POST',
 //       body: JSON.stringify({
-//         description: publication
+//         name: name,
+//         position: position
 //       }),
 //       headers: {
 //         'Content-Type': 'application/json',
@@ -44,14 +45,4 @@
 //   )
 // }
 
-// const Container = styled.div`
-//   text-align: center;
-// `
-
-// const TextArea = styled.textarea`
-//   width: 300px;
-//   height: 100px;
-//   resize: none;
-// `
-
-// export default Nominate
+// export default CreateEmployeePage

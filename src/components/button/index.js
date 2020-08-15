@@ -8,7 +8,7 @@ const SubmitButton = ({ title, onClick }) => {
 }
 
 const Button = styled.button`
-  background: #234465;
+  background: #3a71a8;
   color: #fff;
   padding: 10px;
   width: 100px;
@@ -22,8 +22,8 @@ const Button = styled.button`
 
   &:hover {
     background-color: #fff;
-    border: 2px solid #234465;
-    color: #234465;
+    border: 2px solid #3a71a8;
+    color: #3a71a8;
     font-style: italic;
   }
 `

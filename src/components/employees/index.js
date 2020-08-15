@@ -17,7 +17,7 @@ const Emplayees = (props) => {
   const renderEmployees = useMemo(() => {
     return employees.map((employee, index) => {
       return (
-        <Employee key={employee._id} index={index} position={employee.position} startDate={employee.startDate} username={employee.username}  {...employee} />
+        <Employee key={employee._id} index={index} position={employee.position} name={employee.name}  {...employee} />
       )
     })
   }, [employees])

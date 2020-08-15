@@ -8,10 +8,10 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-        const { username, position, startDate } = req.body;
+        const { email, position, startDate } = req.body;
         const { _id } = req.user;
 
-        models.Employee.create({ username, position, startDate, user: _id })
+        models.Employee.create({ email, position, startDate, user: _id })
             .then((createdEmployee) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { employee: createdEmployee }),

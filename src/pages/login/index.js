@@ -9,7 +9,7 @@ import authenticate from '../../utils/authenticate'
 import UserContext from '../../Context'
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('')
+  const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const context = useContext(UserContext)
   const history = useHistory()
@@ -18,11 +18,11 @@ const LoginPage = () => {
     event.preventDefault()
 
     await authenticate('http://localhost:9000/api/user/login', {
-        username,
+        email,
         password
       }, (user) => {
         context.logIn(user)
-        history.push('/')
+        history.push('/create')
       }, (e) => {
         console.log('Error', e)
       }
@@ -31,13 +31,15 @@ const LoginPage = () => {
 
   return (
     <PageLayout>
-      <form className={styles.container} onSubmit={handleSubmit}>
+       <section className={styles.container}>
         <Title title="Login" />
+      <form className={styles.container} onSubmit={handleSubmit}>
+      <fieldset>
         <Input
-          value={username}
-          onChange={e => setUsername(e.target.value)}
-          label="Username"
-          id="username"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          label="email"
+          id="email"
         />
         <Input
           type="password"
@@ -47,7 +49,9 @@ const LoginPage = () => {
           id="password"
         />
         <SubmitButton title="Login" />
+        </fieldset>
       </form>
+      </section>
     </PageLayout>
   )
 }

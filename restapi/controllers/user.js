@@ -11,8 +11,8 @@ module.exports = {
 
     post: {
         register: (req, res, next) => {
-            const { username, email, password } = req.body;
-            models.User.create({ username, email, password })
+            const { email, password } = req.body;
+            models.User.create({ email, password })
                 .then((createdUser) => {
                   const token = utils.jwt.createToken({ id: createdUser._id });
                   res.header("Authorization", token).send(createdUser);
@@ -53,8 +53,8 @@ module.exports = {
         },
 
         login: (req, res, next) => {
-            const { username, password } = req.body;
-            models.User.findOne({ username })
+            const { email, password } = req.body;
+            models.User.findOne({ email })
                 .then((user) => Promise.all([user, user.matchPassword(password)]))
                 .then(([user, match]) => {
                     if (!match) {
@@ -80,8 +80,8 @@ module.exports = {
 
     put: (req, res, next) => {
         const id = req.params.id;
-        const { username, password } = req.body;
-        models.User.update({ _id: id }, { username, password })
+        const { email, password } = req.body;
+        models.User.update({ _id: id }, { email, password })
             .then((updatedUser) => res.send(updatedUser))
             .catch(next)
     },

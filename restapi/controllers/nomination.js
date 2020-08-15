@@ -9,15 +9,15 @@ module.exports = {
     },
 
     post: (req, res, next) => {
-        const { description, username } = req.body;
+        const { description, name } = req.body;
         const { _id } = req.user;
-//TODO username
-        models.Nomination.create({ description, nominee: username, author: _id })
+//TODO name
+        models.Nomination.create({ description, nominee: name, author: _id })
             .then((createdNomination) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { $push: { createdNominations: createdNomination } }),
-                    models.Employee.updateOne({ username }, { $push: { nominations: createdNomination } }),
-                    models.Employee.updateOne({ username }, { rating: rating+1 } ),
+                    models.Employee.updateOne({ name }, { $push: { nominations: createdNomination } }),
+                    models.Employee.updateOne({ name }, { rating: rating+1 } ),
                     models.Nomination.findOne({ _id: createdNomination._id })
                 ]);
             })

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Link from '../link'
+import Nav from '../nav'
 import styles from './index.module.css'
-import logo from '../../images/white-origami-bird.png'
+import logo from '../../images/spot.jpg'
 import getNavigation from '../../utils/navigation'
 import UserContext from '../../Context'
 
@@ -23,7 +23,7 @@ class Header extends Component {
         {
           links.map(navElement => {
             return (
-              <Link
+              <Nav
                 key={navElement.title}
                 href={navElement.link}
                 title={navElement.title}

@@ -12,6 +12,7 @@ import LoginPage from './pages/login'
 import ProfilePage from './pages/profile'
 import ErrorPage from './pages/error'
 import UserContext from './Context'
+import CreateEmployeePage from './pages/create-employee'
 
 const Navigation = () => {
   const context = useContext(UserContext)
@@ -22,6 +23,9 @@ const Navigation = () => {
       <Route path="/" exact component={HomePage} />
       <Route path="/share"> 
         {loggedIn ? (<Nominate />): (<Redirect to="/login" />)}
+      </Route>
+      <Route path="/create"> 
+        {loggedIn ? (<CreateEmployeePage />): (<Redirect to="/login" />)}
       </Route>
       <Route path="/register">
         {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}

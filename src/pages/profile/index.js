@@ -6,7 +6,7 @@ import Nominations from '../../components/nominations'
 
 
 const ProfilePage = () => {
-  const [username, setUsername] = useState(null)
+  const [email, setEmail] = useState(null)
   //const [posts, setPosts] = useState(null)
   const context = useContext(UserContext)
   const params = useParams()
@@ -25,7 +25,7 @@ const ProfilePage = () => {
       history.push('/error')      
     } else {
       const user = await response.json()
-      setUsername(user.username)
+      setEmail(user.email)
       //setPosts(user.posts && user.posts.length)
     }
   }, [params.userid, history])
@@ -34,7 +34,7 @@ const ProfilePage = () => {
     getData()
   }, [getData])
 
-  if(!username) {
+  if(!email) {
     return (
       <PageLayout>
         <div>Loading....</div>
@@ -45,7 +45,7 @@ const ProfilePage = () => {
   return (
     <PageLayout>
       <div>
-        <p>User: {username}</p>
+        <p>User: {email}</p>
         {/* <p>Posts: {posts}</p> */}
 
         <button onClick={logOut}>Logout</button>

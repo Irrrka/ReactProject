@@ -7,7 +7,7 @@ const Publications = () => {
 
   return (
     <PageLayout>
-      <Title title="Publications" />
+      <Title title="All Employees" />
       <Employees />
     </PageLayout>
   )

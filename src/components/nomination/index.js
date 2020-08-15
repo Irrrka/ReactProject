@@ -13,7 +13,7 @@ const Nomination = ({ description, author, nominee, index }) => {
       <p>
         <span className={styles.user}>
           <small>Author: </small>
-          {author.username}
+          {author.email}
         </span>
       </p>
     </div>

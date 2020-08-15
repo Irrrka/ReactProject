@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useEffect, useMemo, useContext } from 'react'
 import styles from './index.module.css'
-import Origam from '../origam'
 import getNominations from '../../utils/nominations'
 import UserContext from '../../Context'
 import Nomination from '../nomination'

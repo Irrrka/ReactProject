@@ -1,32 +1,93 @@
-import React, {useState, Component} from 'react';
-import UserContext from './Context';
+import React, { useState, useEffect } from 'react'
+import UserContext from './Context'
+import getCookie from './utils/cookie'
 
 const App = (props) => {
-    const[user,setUser] = useState(null);
 
-    login = (user) => {
-        setUser({
-            ...user,
-            loggedIn:true,
-        })
-    } 
-    logout = () => {
-        setUser({
-            loggedIn:false,
-        })
-    } 
+  const [user, setUser] = useState(props.user ? {
+    ...props.user,
+    loggedIn: true
+  } : null)
+  const employees = props.employees || []
+  
+  const logIn = (userObject) => {
+    setUser({
+      ...userObject,
+      loggedIn: true
+    })
+  }
 
-        return (
-            <UserContext.Provider value={{
-                user,
-                login,
-                logout
-            }}>
-                props.children;
-            </UserContext.Provider>
-        )
+  const logOut = () => {
+    document.cookie = "x-auth-token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+    setUser({
+      loggedIn: false
+    })
+  }
+  
+  console.log('user', user)
 
+  return (
+    <UserContext.Provider value={{
+      user,
+      logIn,
+      logOut,
+      employees
+    }}>
+      {props.children}
+    </UserContext.Provider>
+  )
 }
+
+export default App
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, {useState, useEffect, Component} from 'react';
+// import UserContext from './Context';
+
+
+// const App = (props) => {
+//     const [user, setUser] = useState(props.user ? {
+//         ...props.user,
+//         loggedIn: true
+//       } : null)
+//       const employees = props.employees || []
+
+//     login = (user) => {
+//         setUser({
+//             ...user,
+//             loggedIn:true,
+//         })
+//     } 
+
+//     logout = () => {
+//         setUser({
+//             loggedIn:false,
+//         })
+//     } 
+
+//     return (
+//         <UserContext.Provider value={{
+//           user,
+//           logIn,
+//           logOut,
+//           employees
+//         }}>
+//           {props.children}
+//         </UserContext.Provider>
+//       )
+
+// }
 
 
 
@@ -73,5 +134,3 @@ const App = (props) => {
 //         )
 //     }
 // }
-
-export default App

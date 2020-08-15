@@ -6,7 +6,7 @@ const Footer = () => {
 
   return (
     <footer className={styles.Footer}>
-     <p className={styles.paragraph}>Individual Project for SoftUni 2020</p>
+      <p className={styles.paragraph}>Individual Project for SoftUni 2020</p>
     </footer>
   );
 }

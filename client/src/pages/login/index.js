@@ -35,12 +35,12 @@ const LoginPage = (props) => {
             <div>
             <Input 
                    value={email}
-                   onChange={(e)=> handleChange(e, 'email')}
+                   onChange={e => setEmail(e.target.value)}
                    label="Email"
                    id="email"/>
             <Input type='password'
                    value={password}
-                   onChange={(e)=> handleChange(e, 'password')}
+                   onChange={e => setPassword(e.target.value)}
                    label="Password"
                    id="password"/>
             <SubmitButton title="Login" />

@@ -1,15 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './pages/home-page/home-page';
+import { BrowserRouter } from 'react-router-dom';
+import styles from './index.module.css';
+import App from './App';
 import Navigation from './navigation';
-import HomePage from './pages/home-page/home-page';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App>
-      <HomePage />
-    </App>
+    {/* <ErrorBoundary> */}
+      <App>
+        <BrowserRouter>
+          <Navigation />
+        </BrowserRouter>
+      </App>
+    {/* </ErrorBoundary> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react'
 import { useParams, useHistory } from 'react-router-dom'
 import PageLayout from '../../components/page-layout'
-import Nominations from '../../components/origamis'
+import Nominations from '../../components/nominations'
 import UserContext from '../../Context'
 
 
@@ -50,7 +50,7 @@ const ProfilePage = () => {
 
         <button onClick={logOut}>Logout</button>
       </div>
-      <Origamis length={3} />
+      <Nominations />
     </PageLayout>
   )
 }

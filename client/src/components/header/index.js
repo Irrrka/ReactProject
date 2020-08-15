@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Link from '../link/index';
+import Link from '../link';
 import styles from './index.module.css';
 import logo from '../../images/logo.svg';
 import getNavigation from '../../utils/navigation';
-import UserContext from '../../Context'
+import UserContext from '../../Context';
 
 
 class Header extends Component {

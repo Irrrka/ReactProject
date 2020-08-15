@@ -40,7 +40,7 @@ const EmployeePage = () => {
     getData()
   }, [getData])
 
-  if(!user) {
+  if(!email) {
     return (
       <PageLayout>
         <div>Loading....</div>

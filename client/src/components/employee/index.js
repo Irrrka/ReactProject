@@ -1,6 +1,6 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react'
-import { useParams, useHistory } from 'react-router-dom'
-import UserContext from '../../Context'
+import React, { useContext, useState, useEffect, useCallback } from 'react';
+import { useParams, useHistory } from 'react-router-dom';
+import UserContext from '../../Context';
 
 
 const Employee = () => {

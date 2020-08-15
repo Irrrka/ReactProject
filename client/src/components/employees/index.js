@@ -1,16 +1,16 @@
 import React, { useState, useCallback, useEffect } from 'react';
-import styles from './home-page.module.css';
+import styles from './index.module.css';
 
-import { Component } from 'react';
 import Employee from '../../components/employee';
+import getEmployee from '../../utils/employees';
 
 const Employees = (props) => {
     const[employees, setEmployees] = useState();
 
-    getEmployees = useCallback(async () => {
-        const employees = await getEmployees(props.length);      
+    const getEmployees = useCallback(async () => {
+        const employees = await getEmployee(props);      
         setEmployees(employees)
-      },[props.length])
+      },[props])
 
       const renderEmployees = () => {
             const { employees } = this.state;
@@ -25,15 +25,11 @@ const Employees = (props) => {
               getEmployees()
            },[props.UpdatedEmployee, getEmployees]);
 
-    return (
-        // <div class="row">
-        //     </div>
-        <div className={styles.Main}>
-          <div className={styles.Posts}>
+           return (
+            <div className={styles["employees-wrapper"]}>
               {renderEmployees}
-          </div>
-      </div>
-  );
+            </div>
+          )
 }
 
 // class Employees extends Component {

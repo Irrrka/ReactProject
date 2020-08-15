@@ -1,10 +1,11 @@
 import React from 'react';
-import PageLayout from '../profile';
+import PageLayout from '../../components/page-layout';
+import styles from './index.module.css'
 
 const ErrorPage= () => {
     return (
         <PageLayout>
-            <div>Error Page</div>
+            <div className={styles.error}>Error Page</div>
         </PageLayout>
     )
 }

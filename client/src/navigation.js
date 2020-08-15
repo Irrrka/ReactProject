@@ -1,50 +1,40 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react'
 import {
-    BrowserRouter,
-    Switch,
-    Route,
-    Redirect
-} from 'react-router-dom';
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 
-import UserContext from './Context';
-import HomePgae from './pages/home-page';
-import RegisterPage from './pages/register';
-import LoginPage from './pages/login';
-import ProfilePage from './pages/profile';
-import ErrorPage from './pages/error';
-import NominatePage from './pages/nominate';
-import EmployeePage from './pages/employee';
+import HomePage from './pages/home'
+import NominatePage from './pages/nominate'
+import RegisterPage from './pages/register'
+import LoginPage from './pages/login'
+import ProfilePage from './pages/profile'
+import ErrorPage from './pages/error'
+import UserContext from './Context'
 
 const Navigation = () => {
+  const context = useContext(UserContext)
+  const loggedIn = context.user && context.user.loggedIn
 
-    const context = useContext(UserContext)
-    const loggedIn = context.user && context.user.loggedIn
-
-
-    return (
-        <BrowserRouter>
-        <Switch>
-            <Route path="/" exact component={HomePgae} />
-            <Route path="/nominate"> 
-                {loggedIn ? (<NominatePage />): (<Redirect to="/login" />)}
-            </Route>
-            <Route path="/register">
-                {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
-            </Route>
-            <Route path="/login">
-                {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
-            </Route>
-            <Route path="/profile/:userid">
-                {loggedIn ? (<ProfilePage />): (<Redirect to="/login" />)}
-            </Route>
-            <Route path="/employee/:userid">
-                {loggedIn ? (<EmployeePage />): (<Redirect to="/login" />)}
-            </Route>
-            <Route component={ErrorPage} />
-        </Switch>
-        </BrowserRouter>
-    )
+  return (
+    <Switch>
+      <Route path="/" exact component={HomePage} />
+      <Route path="/nominate"> 
+        {loggedIn ? (<NominatePage />): (<Redirect to="/login" />)}
+      </Route>
+      <Route path="/register">
+        {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}
+      </Route>
+      <Route path="/login">
+        {loggedIn ? (<Redirect to="/" />) : (<LoginPage />)}
+      </Route>
+      <Route path="/profile/:userid">
+        {loggedIn ? (<ProfilePage />): (<Redirect to="/login" />)}
+      </Route>
+      <Route component={ErrorPage} />
+    </Switch>
+  )
 }
 
-export default Navigation;
+export default Navigation

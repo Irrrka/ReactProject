@@ -1,30 +1,15 @@
-This project was bootstrapped with Create React App.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-About the project
-The EmployeeBook is Single Page Application using React on front end, Express on back end and MongoDB(Database/Authentication).
+## Available Scripts
 
-Project Requirements
-The Web Application consists of the following sections:
+In the project directory, you can run:
 
-Home section
-Welcome screen with a preview of what you can expect from our site.
-Employee section
-You can observe employee's profile.
-You can vote for this employee.
-Leave a comment.
-Authentication section
-Register Form
-Login Form
-User Profile section
-You can view all your user details and votings for employees.
+### `npm start`
 
-Setup
-Go to the project folder and install required dependencies
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-npm install
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-To run the project in the development mode
 
-npm run build
-npm start
-Open http://localhost:3000 to view it in the browser

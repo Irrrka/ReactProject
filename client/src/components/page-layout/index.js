@@ -1,22 +1,22 @@
-import React from 'react';
-import Header from '../header';
-import styles from './index.module.css';
-import Aside from '../aside';
-import Footer from '../footer';
+import React from 'react'
+import Header from '../header'
+import styles from './index.module.css'
+import Aside from '../aside'
+import Footer from '../footer'
 
-const Container = (props) => {
+const PageLayout = (props) => {
   return (
-    <div className={styles.App}>
-    <Header />
-    {/* <div className={styles.Container}>
-      <Aside /> */}
-      <div className={styles.InnerContainer}>
-        {props.children}
+    <div className={styles.app}>
+      <Header />
+      <div className={styles.container}>
+        <Aside />
+        <div className={styles.innercontainer}>
+          {props.children}
+        </div>
       </div>
-    {/* </div> */}
-    <Footer />
-  </div>
-  );
+      <Footer />
+    </div>
+  )
 }
 
-export default Container;
+export default PageLayout

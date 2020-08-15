@@ -1,17 +1,11 @@
-import React from 'react';
-import styles from './index.module.css';
-import Button from '../button';
+import React from 'react'
+import stiles from './index.module.css'
+import { Button } from 'react-dom'
 
-const SubmitButton = ({title, onClick }) => {
+const SubmitButton = ({ title, onClick }) => {
   return (
-//     <div class="d-flex justify-content-between">
-//   <h3>{{ 'Projects' | translate }}</h3>
-//   <button (click)="addNewProject()" type="button" class="btn btn-primary">
-//     <i class="fas fa-plus"></i>
-//     {{'New project' | translate}}</button>
-// </div>
-   <Button type="submit" onClick={onClick} className={styles.submit}> {title} </Button>
-  );
+    <Button className={stiles.submit} type="submit" onClick={onClick}>{title}</Button>
+  )
 }
 
-export default SubmitButton;
+export default SubmitButton

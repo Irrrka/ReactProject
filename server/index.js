@@ -1,20 +1,38 @@
-const config = require('./config/config');
-const dbConnection = require('./config/database');
+import express from 'express';
 
-const app = require('express')();
+// we'll talk about this in a minute:
+import serverRenderer from './middleware/renderer';
+import getEmployees from './middleware/employees';
+import getNominations from './middleware/nominations';
+import auth from './middleware/auth';
+import path from 'path';
+import cookieParser from 'cookie-parser'
 
-dbConnection().then(() => {
+const PORT = 3000;
 
-    require('./config/express')(app);
+// initialize the application and create the routes
+const app = express();
+const router = express.Router();
 
-    require('./config/routes')(app);
+app.use(cookieParser('secret'))
 
-    app.use(function (err, req, res, next) {
-        console.error(err);
-        res.status(500).send(err.message);
-        console.log('*'.repeat(90))
-    });
+router.use('^/$', auth, getEmployees, getNominations, serverRenderer);
 
-    app.listen(config.port, console.log(`Listening on port ${config.port}!`))
+// other static resources should just be served as they are
+router.use(express.static(
+    path.resolve(__dirname, '..', 'build'),
+    { maxAge: '30d' },
+));
 
-}).catch(console.error);
+// tell the app to use the above rules
+router.use('*', serverRenderer);
+app.use(router);
+
+// start the app
+app.listen(PORT, (error) => {
+    if (error) {
+        return console.log('something bad happened', error);
+    }
+
+    console.log("listening on " + PORT + "...");
+});

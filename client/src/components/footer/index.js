@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Nav from '../link'
 import styles from './index.module.css'
 import getNavigation from '../../utils/navigation'
 import UserContext from '../../Context'
@@ -16,22 +15,7 @@ class Footer extends Component {
     const links = getNavigation(user)
     return (
       <footer className={styles.Footer}>
-        <div>
-          {
-            links.map(navElement => {
-              return (
-                <Nav
-                  key={navElement.title}
-                  href={navElement.link}
-                  title={navElement.title}
-                  type="footer"
-                />
-              )
-            })
-          }
-        </div>
-        <p className={styles.university}>Software University 2019</p>
-
+        <p className={styles.university}>Employee-book - Individual React Project for Software University 2020</p>
       </footer>
     )
   }

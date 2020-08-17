@@ -1,31 +1,10 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styles from './index.module.css';
 
-const SubmitButton = ({ title, onClick }) => {
-  return (
-    <Button type="submit" onClick={onClick}>{title}</Button>
-  )
+const Button = ({ text, onClick }) => {
+    return (
+        <button onClick={onClick} className={styles.btn}>{text}</button>
+    );
 }
 
-const Button = styled.button`
-  background: #3a71a8;
-  color: #fff;
-  padding: 10px;
-  width: 100px;
-  border-radius: 5px;
-  display: block;
-  margin: 0 auto;
-  border: none;
-  border: 2px solid white;
-  margin: 10px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #fff;
-    border: 2px solid #3a71a8;
-    color: #3a71a8;
-    font-style: italic;
-  }
-`
-
-export default SubmitButton
+export default Button;

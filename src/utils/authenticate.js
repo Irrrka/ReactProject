@@ -12,9 +12,9 @@ const authenticate = async (url, body, onSuccess, onFailure) => {
 
     const response = await promise.json()
 
-    if (response.email && authToken) {
+    if (response.username && authToken) {
       onSuccess({
-        email: response.email,
+        username: response.username,
         id: response._id
       })
     } else {

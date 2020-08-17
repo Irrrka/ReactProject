@@ -1,9 +1,33 @@
-.field{
-    color: #3a71a8;
-    padding: 4px;
-    margin: 2px;
-}
-
-.input {
-margin-left: 4px;
-}
+.input-container{
+    margin-bottom: 5%;
+    text-align: center;
+   }
+   
+   .input-field {
+     display: inline-block;
+     box-sizing: border-box;
+     margin-bottom: 20px;
+     padding: 4px;
+     width: 300px;
+     height: 40px;
+     border: none;
+     border-bottom: 1px solid #AAA;
+     font-family: 'Roboto', sans-serif;
+     font-weight: 400;
+     font-size: 15px;
+     transition: 0.2s ease;
+   }
+   
+   .input-field[type="text"]:hover,
+   .input-field[type="password"]:hover {
+     border-bottom: 2px solid #404040;
+     color: #404040;
+     transition: 0.2s ease;
+   }
+   
+   .input-field[type="text"]:focus,
+   .input-field[type="password"]:focus {
+       outline: none;
+       border-bottom: 2px solid #404040;
+   }
+   

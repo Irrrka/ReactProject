@@ -1,40 +1,45 @@
-const getNavigation = (user) => {
-
-  const authLinks = [
-    {
-      title: "HomePage",
-      link: "/"
-    },
-    {
-      title: "Join",
-      link: "/create"
-    },
-    {
-      title: "Nominate",
-      link: "/nominate"
-    },
-    {
-      title: "Profile",
-      link: `/profile/${user && user.id}`
-    }
-  ]
-
+const getLinks = (logged, user) => {
+    
+  const userLinks = [
+      {
+          title: 'Home',
+          href: '/'
+      },
+      {
+          title: 'Add Employee',
+          href: '/create'
+      },
+      {
+          title: 'Profile',
+          href: `/profile/${user && user._id}`
+      },
+      {
+          title: 'Logout',
+          href: '/'
+      },
+      
+  ];
+  
   const guestLinks = [
-    {
-      title: "HomePage",
-      link: "/"
-    },
-    {
-      title: "Register",
-      link: "/register"
-    },
-    {
-      title: "Login",
-      link: "/login"
-    }
-  ]
-  const loggedIn = user && user.loggedIn
-  return loggedIn ? authLinks : guestLinks
+      {
+          title: 'Home',
+          href: '/'
+      },
+      {
+          title: 'Login',
+          href: '/login'
+      },
+      {
+          title: 'Register',
+          href: '/register'
+      },
+  ];
+
+  if (logged){
+      return userLinks;
+  }
+
+  return guestLinks;
 }
 
-export default getNavigation
+export default getLinks;

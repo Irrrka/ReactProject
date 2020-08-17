@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import Nav from '../nav'
+import Link from '../link'
 import styles from './index.module.css'
-import logo from '../../images/spot.jpg'
+import logo from '../../images/logo.jpg'
 import getNavigation from '../../utils/navigation'
 import UserContext from '../../Context'
 
@@ -22,12 +22,12 @@ class Header extends Component {
         <img alt="logo" className={styles.logo} src={logo} />
         {
           links.map(navElement => {
+            console.log(navElement.link)
             return (
-              <Nav
+              <Link
                 key={navElement.title}
-                href={navElement.link}
+                href={navElement.href}
                 title={navElement.title}
-                type="header"
               />
             )
           })

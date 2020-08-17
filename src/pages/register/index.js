@@ -1,91 +1,165 @@
-import React, { Component } from 'react'
-import Title from '../../components/title'
-import SubmitButton from '../../components/button'
-import styles from './index.module.css'
-import PageLayout from '../../components/page-layout'
-import Input from '../../components/input'
-import authenticate from '../../utils/authenticate'
-import UserContext from '../../Context'
+import React, { Component } from 'react';
+import PageLayout from '../../components/page-layout';
+import Title from '../../components/title';
+import Input from '../../components/input';
+import Button from '../../components/button';
+import UserContext from '../../Context';
+import styles from './index.module.css';
+import Error from '../../components/error';
+import { withRouter } from 'react-router-dom';
+
 
 class RegisterPage extends Component {
-  constructor(props) {
-    super(props)
+    static contextType = UserContext;
 
-    this.state = {
-      email: "",
-      password: "",
-      rePassword: ""
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username: '',
+            password: '',
+            confirmPassword: '',
+            errors: []
+        }
     }
-  }
 
-  static contextType = UserContext
+    validate() {
+        const {
+            username,
+            password,
+            confirmPassword
+        } = this.state;
 
-  onChange = (event, type) => {
-    const newState = {}
-    newState[type] = event.target.value
+        const errors = [];
 
-    this.setState(newState)
-  }
+        if (username.length < 3) {
+            errors.push('Username must be atleast 3 charecters');
+        }
+        if (password.length < 6) {
+            errors.push('Password must be atleast 6 characters');
+        }
+        if (password !== confirmPassword) {
+            errors.push('Passwords don\'t match');
+        }
 
-  handleSubmit = async (event) => {
-    event.preventDefault()
-    const {
-      email,
-      password
-    } = this.state
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return true;
+        }
 
-    await authenticate('http://localhost:9000/api/user/register', {
-        email,
-        password
-      }, (user) => {
-        this.context.logIn(user)
-        this.props.history.push('/create')
-      }, (e) => {
-        console.log('Error', e)
-      }
-    )
-  }
+        return false;
+    }
 
-  render() {
-    const {
-      email,
-      password,
-      rePassword
-    } = this.state
+    onChange(e, type) {
+        const newState = {};
+        newState[type] = e.target.value;
+        this.setState(newState);
+    }
 
-    return (
-      <PageLayout>
-         <section className={styles.container}>
-              <Title title="Register" />
-            <form onSubmit={this.handleSubmit}>
-            <fieldset>
-            <Input
-              value={email}
-              onChange={(e) => this.onChange(e, 'email')}
-              label="Email"
-              id="email"
-            />
-            <Input
-              type="password"
-              value={password}
-              onChange={(e) => this.onChange(e, 'password')}
-              label="Password"
-              id="password"
-            />
-            <Input
-              type="password"
-              value={rePassword}
-              onChange={(e) => this.onChange(e, 'rePassword')}
-              label="Repeat Password"
-              id="re-password"
-            />
-            <SubmitButton title="Register" />
-          </fieldset>
-        </form>
-        </section>
-      </PageLayout>
-    )
-  }
+    onSubmit = (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state;
+
+        const hasErrors = this.validate();
+
+        if (hasErrors) {
+            return;
+        }
+
+        fetch('http://localhost:9999/api/user/register', {
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            const token = response.headers.get('auth');
+            console.log('token ', token);
+            console.log('resposne ', response);
+            if (token) {
+                document.cookie = `x-auth-token=${token}`;
+            }
+            return response.json();
+        }).then(result => {
+
+            if (result.error) {
+                this.setState({
+                    errors: [result.error]
+                });
+                return
+            }
+
+            if (result.username) {
+                const user = {
+                    _id: result._id,
+                    username: result.username,
+                    employees: result.employees,
+                };
+                this.context.login(user);
+                this.props.history.push('/');
+            }
+        })
+    }
+
+    render() {
+        const {
+            username,
+            password,
+            confirmPassword,
+            errors
+        } = this.state;
+
+        return (
+            <PageLayout>
+                <form className={styles['register-form']} onSubmit={this.onSubmit}>
+                    <Title text="Create your account" />
+                    <div className={styles['input-field']}>
+                        <Input
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Username"
+                            onChange={(e) => this.onChange(e, 'username')}
+                        />
+                    </div>
+
+                    <div className={styles['input-field']}>
+                        <Input
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => this.onChange(e, 'password')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+                    <div className={styles['input-field']}>
+                        <Input
+                            type="password"
+                            name="rePassword"
+                            value={confirmPassword}
+                            placeholder="Confirm Password"
+                            onChange={(e) => this.onChange(e, 'confirmPassword')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+                    {errors.map(error => (
+                        <Error key={error} text={error} type="error" />
+                    ))}
+                    <div className={styles.submit}>
+                        <Button text="Sign Up" type="submit" />
+                    </div>
+                </form>
+            </PageLayout>
+        );
+    }
+
 }
 
-export default RegisterPage
+export default withRouter(RegisterPage);

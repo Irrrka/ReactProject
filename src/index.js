@@ -1,21 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import Navigation from './navigation'
-import App from './App'
-import ErrorBoundary from './ErrorBoundary';
-import { BrowserRouter } from 'react-router-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import Navigation from './Navigation';
+import Auth from './Auth';
+import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <ErrorBoundary>
-      <App {...window.__STATE__}>
-        <BrowserRouter>
-          <Navigation />
-        </BrowserRouter>
-      </App>
-    </ErrorBoundary>
+    <Auth >
+      <BrowserRouter>
+        <Navigation />
+      </BrowserRouter>
+    </Auth>
   </React.StrictMode>,
   document.getElementById('root')
-)
+);
 

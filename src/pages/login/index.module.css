@@ -1,6 +1,20 @@
-.container {
-  text-align: center;
-    margin: auto;
+.login-form {
+    box-shadow: 0 20px 20px 0 rgba(0, 0, 0, 0.2);
     width: 400px;
-    height: auto;
+    padding-left: 150px;
+    padding-right: 150px;
+    padding-bottom: 70px;
+    border: 1px solid #404040;
+    margin: auto;
+    margin-top: 6%;
+    margin-bottom: 5%;
+    text-align: center;
+}
+
+.submit {
+    margin-top: 70px;
+}
+
+.input-field{
+    margin-top: 70px;
 }

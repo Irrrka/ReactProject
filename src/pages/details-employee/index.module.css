@@ -1,0 +1,67 @@
+.book-container {
+    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2);
+    max-width: 800px;
+    height: 455px;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%; 
+    
+    display: flex;
+}
+
+.data-container{
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-container {
+      margin-top: 15px;
+}
+
+.liked{
+     margin-top: 5px;
+     color: gray;
+}
+
+.opinion-title{
+      margin-top: 15px;
+      font-size: 18px;
+}
+
+.field {
+      margin-top: 15px;
+      font-size: 18px;
+      width: 300px;
+      border-bottom: 1px solid #404040;
+      padding: 0.5px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+}
+
+.opinion{
+      margin-top: 3px;
+      width: 300px;
+      padding: 10px;
+      height: 150px;
+      resize: none;
+      border: 1px solid grey;
+      outline: none;
+      font-size: 16px;
+  }
+.img-container{
+      text-align: left;
+ }
+  
+.book-cover{
+      height: 455px;
+      width: 300px;
+      margin-left: 0px;
+}
+
+.likes {
+      color: grey;
+      font-size: 18px;
+      display: inline;
+}

@@ -1,59 +1,146 @@
-import React, { useState, useContext } from 'react'
-import { useHistory } from "react-router-dom"
-import Title from '../../components/title'
-import SubmitButton from '../../components/button'
-import styles from './index.module.css'
-import PageLayout from '../../components/page-layout'
-import Input from '../../components/input'
-import authenticate from '../../utils/authenticate'
-import UserContext from '../../Context'
+import React, { Component } from 'react';
+import PageLayout from '../../components/page-layout';
+import Title from '../../components/title';
+import Input from '../../components/input';
+import Button from '../../components/button';
+import Error from '../../components/error';
+import styles from './index.module.css';
+import UserContext from '../../Context';
+import { withRouter } from 'react-router-dom';
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const context = useContext(UserContext)
-  const history = useHistory()
-  
-  const handleSubmit = async (event) => {
-    event.preventDefault()
 
-    await authenticate('http://localhost:9000/api/user/login', {
-        email,
-        password
-      }, (user) => {
-        context.logIn(user)
-        history.push('/create')
-      }, (e) => {
-        console.log('Error', e)
-      }
-    )
-  }
+class LoginPage extends Component {
 
-  return (
-    <PageLayout>
-       <section className={styles.container}>
-        <Title title="Login" />
-      <form className={styles.container} onSubmit={handleSubmit}>
-      <fieldset>
-        <Input
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          label="email"
-          id="email"
-        />
-        <Input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-          label="Password"
-          id="password"
-        />
-        <SubmitButton title="Login" />
-        </fieldset>
-      </form>
-      </section>
-    </PageLayout>
-  )
+    static contextType = UserContext;
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            username: '',
+            password: '',
+            errors: []
+        };
+    }
+
+    validate() {
+        const {
+            username,
+            password
+        } = this.state;
+
+        const errors = [];
+
+        if (username.length === 0) {
+            errors.push('No username provided');
+        }
+
+        if (password.length === 0) {
+            errors.push('No password provided');
+        }
+
+        if (errors.length > 0) {
+            this.setState({ errors });
+            return true;
+        }
+
+        return false;
+    }
+
+    onChange = (e, type) => {
+        const newState = {};
+        newState[type] = e.target.value;
+        this.setState(newState);
+    }
+
+    onSubmit = (e) => {
+        e.preventDefault();
+        const {
+            username,
+            password
+        } = this.state;
+
+        const hasErrors = this.validate();
+
+        if (hasErrors) {
+            return
+        }
+
+        fetch('http://localhost:9999/api/user/login', {
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            const token = response.headers.get('auth');
+            if (token) {
+                document.cookie = `x-auth-token=${token}`;
+            } else {
+                this.setState({
+                    errors: ['Unauthorized']
+                })
+            }
+            return response.json();
+        }).then(result => {
+            if (result.username) {
+                const user = {
+                    _id: result._id,
+                    username: result.username,
+                    employees: result.employees,
+                };
+                this.context.login(user);
+                this.props.history.push('/');
+            }
+        })
+    }
+
+    render() {
+        const {
+            username,
+            password,
+            errors
+        } = this.state;
+
+        return (
+            <PageLayout footer="form">
+                <form className={styles['login-form']} onSubmit={this.onSubmit}>
+                    <Title text="Login" />
+                    <div className={styles['input-field']}>
+                        <Input
+                            type="text"
+                            name="username"
+                            value={username}
+                            placeholder="Username"
+                            onChange={(e) => this.onChange(e, 'username')}
+                        />
+                    </div>
+
+                    <div className={styles['input-field']}>
+                        <Input
+                            type="password"
+                            name="password"
+                            value={password}
+                            placeholder="Password"
+                            onChange={(e) => this.onChange(e, 'password')}
+                            className={styles['input-field']}
+                        />
+                    </div>
+
+                    {errors.map(error => (
+                        <Error key={error} text={error} type="error" />
+                    ))}
+
+                    <div className={styles.submit}>
+                        <Button text="Login" type="submit" />
+                    </div>
+                </form>
+            </PageLayout>
+        );
+    }
 }
 
-export default LoginPage
+export default withRouter(LoginPage);

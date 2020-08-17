@@ -1,36 +1,62 @@
-import React, { useState, useCallback, useEffect, useMemo, useContext } from 'react'
-import styles from './index.module.css'
-import UserContext from '../../Context'
-import Employee from '../employee'
-import getEmployee from '../../utils/employee'
+import React, { Component } from 'react';
+import PageLayout from '../../components/page-layout';
+import PageTitle from '../../components/title';
+import styles from './index.module.css';
+import AlertMsg from '../../components/error';
+import Title from '../../components/title';
+import Employee from '../employee';
 
+class Employees extends Component {
+    constructor(props) {
+        super(props);
 
-const Emplayees = (props) => {
-  const context = useContext(UserContext)
-  const [employees, setEmployees] = useState(context.employees || [])
+        this.state = {
+            employees: []
+        }
+    }
 
-  const getEmployees = useCallback(async () => {
-    const employees = await getEmployee()
-    setEmployees(employees)
-  }, [])
+    getEmployees = async () => {
+        const response = await fetch('http://localhost:9999/api/employee');
+        const employees = await response.json();
+        this.setState({
+          employees
+        });
+    }
 
-  const renderEmployees = useMemo(() => {
-    return employees.map((employee, index) => {
-      return (
-        <Employee key={employee._id} index={index} position={employee.position} name={employee.name}  {...employee} />
-      )
-    })
-  }, [employees])
+    renderEmployees() {
+        let {
+            employees
+        } = this.state;
 
-  useEffect(() => {
-    getEmployees()
-  }, [props.updatedEmployees, getEmployees])
+        employees.sort((a, b) => b.likes.length - a.likes.length);
 
-  return (
-    <div className={styles.wrapper}>
-      {renderEmployees}
-    </div>
-  )
+        return (
+            <div className={styles.container}>
+                {employees.map(employee => {
+                    return (
+                        <Employee key={employee._id} {...employee} />
+                    );
+                })}
+            </div>
+        );
+    }
+
+    componentDidMount() {
+        this.getEmployees();
+    }
+
+    render() {
+        let {
+            employees
+        } = this.state;
+
+        return (
+            <PageLayout>
+                <Title title="All Employees" />
+                {this.renderEmployees()}
+            </PageLayout>
+        );
+    }
 }
 
-export default Emplayees
+export default Employees;

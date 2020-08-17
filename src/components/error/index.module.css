@@ -1,0 +1,8 @@
+.error-container{
+    margin:5%;
+    display: inline-block;
+    padding: 1%;
+    border: 1px solid red;
+    color: red;
+    font-size: 10px;
+}

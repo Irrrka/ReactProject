@@ -1,5 +1,5 @@
-.submit {
-  background: #3a71a8;
+.btn {
+  background: #234465;
   color: #fff;
   padding: 10px;
   width: 100px;
@@ -12,9 +12,9 @@
   cursor: pointer;
 }
 
-.submit:hover{
+.btn:hover{
   background-color: #fff;
-  border: 2px solid #3a71a8;
-  color: #3a71a8;
+  border: 2px solid #234465;
+  color: #234465;
   font-style: italic;
 }

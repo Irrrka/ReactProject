@@ -32,11 +32,11 @@ class LoginPage extends Component {
         const errors = [];
 
         if (username.length === 0) {
-            errors.push('No username provided');
+            errors.push('Please add Company name');
         }
 
         if (password.length === 0) {
-            errors.push('No password provided');
+            errors.push('Please add password');
         }
 
         if (errors.length > 0) {
@@ -107,14 +107,14 @@ class LoginPage extends Component {
 
         return (
             <PageLayout footer="form">
-                <form className={styles['login-form']} onSubmit={this.onSubmit}>
+                <form className={styles.container} onSubmit={this.onSubmit}>
                     <Title text="Login" />
                     <div className={styles['input-field']}>
                         <Input
                             type="text"
                             name="username"
                             value={username}
-                            placeholder="Username"
+                            placeholder="Company"
                             onChange={(e) => this.onChange(e, 'username')}
                         />
                     </div>

@@ -76,7 +76,7 @@ class AddEmployeePage extends Component {
         } = this.state;
         return (
             <PageLayout>
-                <form className={styles['book-form']} onSubmit={this.onSubmit}>
+                <form className={styles.container} onSubmit={this.onSubmit}>
                     <Title text="Add an Employee to our endorce system" />
 
                     <div className={styles['input-field']}>
@@ -87,13 +87,20 @@ class AddEmployeePage extends Component {
                             onChange={(e) => this.onChange(e, 'name')}
                         />
                     </div>
-
                     <div className={styles['input-field']}>
                         <Input
                             name="email"
                             value={email}
                             placeholder="Email"
                             onChange={(e) => this.onChange(e, 'email')}
+                        />
+                    </div>
+                    <div className={styles['input-field']}>
+                        <Input
+                            name="position"
+                            value={position}
+                            placeholder="Position"
+                            onChange={(e) => this.onChange(e, 'position')}
                         />
                     </div>
 

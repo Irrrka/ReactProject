@@ -5,7 +5,6 @@ import logo from '../../images/logo.jpg'
 import getNavigation from '../../utils/navigation'
 import UserContext from '../../Context'
 
-
 class Header extends Component {
 
   static contextType = UserContext

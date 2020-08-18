@@ -1,16 +1,17 @@
 
 .navigation {
   width: 100%;
-  height: 14vh;
-  background-color: #234465;
+  height: 60px;
+  background-color: #3a71a8;
   color: white;
   position: fixed;
   top: 0;
-  border-bottom: 2px solid #ffa000;
-  border-top: 2px solid #ffa000;
+  border-bottom: 1px solid #d884a4;
+  border-top: 1px solid #d884a4;
 }
 
 .logo {
-  width: 60px;
-  margin: 20px;
+  width: 80px;
+  height: auto;
+  margin: 10px;
 }

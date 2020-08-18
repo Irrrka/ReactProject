@@ -30,16 +30,15 @@ class ProfilePage extends Component {
     }
 
     renderEmployees = () => {
-        if (this.state.employees.length === 0) {
-            return (
-                <Error text="There aren't any employees by you. You can do post now :)" type="no-data"/>
-            );
-        }
-        
+        const {
+            username,
+            employees
+        } = this.state;
+
         return (
             <div>
-                <h2>All Employees Listed by You</h2>
-                <div className={styles[`book-container`]}>
+                <h3>All Employees of your Company:</h3>
+                <div className={styles.container}>
                     {this.state.employees.map(employee => {
                         return (
                             <Employee key={employee._id} {...employee} />
@@ -61,15 +60,15 @@ class ProfilePage extends Component {
         } = this.state;
 
         const lenght = employees.length;
-        const likes = employees.map(empl => empl.likes.length).reduce((a, b) => a + b, 0);
+        const likes = employees.map(employees => employees.likes.length).reduce((a, b) => a + b, 0);
 
         return (
             <PageLayout>
                 <Title text="Profile" />
                 <div className={styles.card}>
                 <h1>{username}</h1>
-                    <p className={styles.title}>Employees Posted: {lenght}</p>
-                    <p className={styles.title}>Likes Aquired: {likes}</p>
+                    <p className={styles.title}>Your Company has already: {lenght} employees.</p>
+                    <p className={styles.title}>Nomination statistics: {likes}</p>
                 </div>
                 {this.renderEmployees()}
 

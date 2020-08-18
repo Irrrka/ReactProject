@@ -15,11 +15,11 @@ import UserContext from './Context';
 const Navigation = () => {
     const context = useContext(UserContext);
     const loggedIn = context.user && context.logged;
-    
+    console.log("context" + context.user)
     return (
         <Switch>
            <Route path="/" exact component={HomePage} />
-            <Route path="/all" component={Employees} />
+            {/* <Route path="/all" component={Employees} /> */}
             <Route path="/details/:id" component={EmployeeDetailsPage} />
             <Route path="/register">
                 {loggedIn ? (<Redirect to="/" />) : (<RegisterPage />)}

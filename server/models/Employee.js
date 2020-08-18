@@ -20,11 +20,6 @@ const employeeSchema = new Schema({
         required: true,
     },
     
-    nomination: {
-        type: String,
-        required: true,
-    },
-
     // imageUrl: {
     //     type: String,
     //     required: true,

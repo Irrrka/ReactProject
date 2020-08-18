@@ -80,8 +80,6 @@ class RegisterPage extends Component {
             }
         }).then(response => {
             const token = response.headers.get('auth');
-            console.log('token ', token);
-            console.log('resposne ', response);
             if (token) {
                 document.cookie = `x-auth-token=${token}`;
             }
@@ -117,14 +115,13 @@ class RegisterPage extends Component {
 
         return (
             <PageLayout>
-                <form className={styles['register-form']} onSubmit={this.onSubmit}>
-                    <Title text="Create your account" />
+                <form className={styles.container} onSubmit={this.onSubmit}>
+                    <Title text="Register your Company" />
                     <div className={styles['input-field']}>
                         <Input
-                            type="text"
                             name="username"
                             value={username}
-                            placeholder="Username"
+                            placeholder="Company name"
                             onChange={(e) => this.onChange(e, 'username')}
                         />
                     </div>

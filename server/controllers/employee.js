@@ -8,7 +8,7 @@ module.exports = {
     },
 
     getDetails: (req, res, next) => {
-        models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('likes', 'username')
+        models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('likes', 'username', 'nominations')
             .then((employee) => {
                 res.send(employee)
             })
@@ -20,12 +20,10 @@ module.exports = {
             name,
             email,
             position,
-            nomination,
         } = req.body;
-
         const { _id } = req.user;
-
-        models.Employee.create({ name, email, position, nomination, createdBy: _id })
+console.log(req)
+        models.Employee.create({ name, email, position, createdBy: _id })
             .then((createdEmployee) => {
                 return Promise.all([
                     models.User.updateOne({ _id }, { $push: { employees: createdEmployee } }),
@@ -33,6 +31,7 @@ module.exports = {
                 ]);
             })
             .then(([modifiedObj, obj]) => {
+                console.log("obj " + obj)
                 res.send(obj);
             })
             .catch(next);
@@ -42,9 +41,8 @@ module.exports = {
         const id = req.params.id;
         const {
             name,
-            email,
             position,
-            nomination} = req.body;
+            } = req.body;
 
         models.Employee.updateOne({ _id: id }, { name, position })
             .then((updatedEmployee) => res.send(updatedEmployee))
@@ -63,6 +61,19 @@ module.exports = {
         const { _id } = req.user;
 
         models.Employee.findByIdAndUpdate({ _id: id }, { $push: { likes: _id } }, { new: true, useFindAndModify: false }).populate('likes', 'username')
+            .then((updatedEmployee) => {
+                res.send(updatedEmployee)
+            })
+            .catch(next);
+    },
+
+    nominate: (req, res, next) => {
+        const id = req.params.id;
+        const {
+            nomination,
+            } = req.body;
+
+        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { nominations: nomination } }, { new: true, useFindAndModify: false }).populate('nominations', 'username')
             .then((updatedEmployee) => {
                 res.send(updatedEmployee)
             })

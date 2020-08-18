@@ -1,18 +1,24 @@
-.nav-item {
-  display: inline-block;
-  height: auto;
-  margin-right: 5%;
-  padding: 3%;
-  margin: 0.1%;
-}
-
-.nav-link:hover {
-  font-weight: bold;
-}
-
-.nav-item .nav-link{
+.header-link {
   color: white;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 20px;
 }
 
+.header-list-item{
+  display: inline-block;
+  height: auto;
+  margin-right: 1%;
+  cursor: pointer;
+  padding: 1%;
+  margin: 1%;
+  vertical-align: top;
+}
+
+.header-list-item:not(:first-child) {
+  padding: 10px;
+  margin-top: 5px;
+}
+
+.header-list-item:hover {
+  font-weight: bold;
+}

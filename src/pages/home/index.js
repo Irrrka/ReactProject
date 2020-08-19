@@ -6,6 +6,7 @@ import UserContext from '../../Context'
 import Error from '../../components/error';
 import styles from './index.module.css';
 import About from '../about';
+import EmployeesPage from '../all-employees';
 
 class HomePage extends Component {
   static contextType = UserContext;
@@ -30,14 +31,7 @@ class HomePage extends Component {
       employees
     } = this.state;
 
-    employees.sort((a, b) => b.likes.length - a.likes.length);
-    //employees = employees.slice(0, 3);
-
-    // if (employees.length === 0) {
-    //   return (
-    //     <Error text="Sorry, there aren't any employees at the moment" type="no-data" />
-    //   );
-    // }
+    //employees.sort((a, b) => b.likes.length - a.likes.length);
 
     return (
       <div>
@@ -62,18 +56,8 @@ class HomePage extends Component {
     if (!this.renderEmployees()) {
       return <About/>
     } else {
-      
       return (
-        <PageLayout>
-          <Title text="Most Nominated Employyes" />
-          {}
-          <Title text="About" />
-          <div className={styles.container}>
-            <div className={styles.text}>
-            Employee spot awards help increase employee engagement and motivation. Spot awards let you recognize employee accomplishments when they happen "on the spot" while making the accomplishment and award more relevant and "immediate" for the employee. Spot awards reinforce positive behavior and let employees know that efforts are noticed and appreciated. Impactful spot awards can be used for special recognition, "thank you", above & beyond effort, project completion, positive customer feedback, etc.
-          </div>
-          </div>
-        </PageLayout>
+          <EmployeesPage />
       );
     }
   }

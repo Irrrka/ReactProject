@@ -4,7 +4,7 @@ import styles from './index.module.css';
 const Error = ({text}) => {
     return(
         <div className={styles.container}>
-            <h2>{text}</h2>
+            <h2><i>{text}</i></h2>
         </div>
     );
 }

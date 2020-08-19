@@ -58,12 +58,10 @@ class AddEmployeePage extends Component {
             }
         }).then(response => {
             if (response) {
-
             }
             return response.json();
         }).then(result => {
             this.props.history.push('/');
-
         })
     }
 
@@ -79,7 +77,7 @@ class AddEmployeePage extends Component {
                 <form className={styles.container} onSubmit={this.onSubmit}>
                     <Title text="Add an Employee to our endorce system" />
 
-                    <div className={styles['input-field']}>
+                    <div className={styles.input}>
                         <Input
                             name="name"
                             value={name}
@@ -87,7 +85,7 @@ class AddEmployeePage extends Component {
                             onChange={(e) => this.onChange(e, 'name')}
                         />
                     </div>
-                    <div className={styles['input-field']}>
+                    <div className={styles.input}>
                         <Input
                             name="email"
                             value={email}
@@ -95,7 +93,7 @@ class AddEmployeePage extends Component {
                             onChange={(e) => this.onChange(e, 'email')}
                         />
                     </div>
-                    <div className={styles['input-field']}>
+                    <div className={styles.input}>
                         <Input
                             name="position"
                             value={position}

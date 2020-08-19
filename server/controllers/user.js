@@ -83,9 +83,9 @@ module.exports = {
 
         logout: (req, res, next) => {
             const token = req.cookies[config.authCookieName];
-            console.log('-'.repeat(100));
+            console.log('-'.repeat(90));
             console.log(token);
-            console.log('-'.repeat(100));
+            console.log('-'.repeat(90));
             models.TokenBlacklist.create({ token })
                 .then(() => {
                     res.clearCookie(config.authCookieName).send('Logout successfully!');

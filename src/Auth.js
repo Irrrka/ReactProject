@@ -49,7 +49,7 @@ class Auth extends Component {
                 const user = {
                     _id: result.user._id,
                     username: result.user.username,
-                    books: result.user.books,
+                    employees: result.user.employees,
                 };
                 this.login(user);
             } else {

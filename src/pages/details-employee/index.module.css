@@ -1,5 +1,4 @@
-.book-container {
-    box-shadow: 0 4px 8px 10px rgba(0, 0, 0, 0.2);
+.container {
     max-width: 800px;
     height: 455px;
     margin: auto;
@@ -15,13 +14,13 @@
     margin-right: auto;
 }
 
-.button-container {
+.buttons {
       margin-top: 15px;
 }
 
 .liked{
      margin-top: 5px;
-     color: gray;
+     color: #d884a4;
 }
 
 .opinion-title{
@@ -61,7 +60,7 @@
 }
 
 .likes {
-      color: grey;
+      color: #3a71a8;
       font-size: 18px;
       display: inline;
 }

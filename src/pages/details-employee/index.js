@@ -16,14 +16,13 @@ class EmployeeDetailsPage extends Component {
             name: '',
             email: '',
             position: '',
-            opinion: '',
             createdBy: '',
             deleteClick: false,
             likes: []
         }
     }
 
-    likedOrNot = () => {
+    liked = () => {
         const {
             likes
         } = this.state;
@@ -32,15 +31,15 @@ class EmployeeDetailsPage extends Component {
             username
         } = this.context.user;
 
-        let likedAlready = false;
+        let isLiked = false;
 
         likes.forEach(like => {
             if (like.username === username) {
-                likedAlready = true;
+                isLiked = true;
             }
         })
 
-        return likedAlready;
+        return isLiked;
     }
 
     getEmployee = async () => {
@@ -59,20 +58,46 @@ class EmployeeDetailsPage extends Component {
 
         if (likes.length === 0) {
             return (
-                <div className={styles.likes}>No collegues are voted yet!</div>
+                <div className={styles.likes}>Nobody voted yet!</div>
             )
         }
 
-        let moreLikes = '';
+        //let moreLikes = '';
 
-        if (likes.length > 1) {
-            moreLikes = ` and ${likes.length - 1} more.`;
-        }
+        // if (likes.length > 1) {
+        //     moreLikes = ` and ${likes.length - 1} more.`;
+        // }
 
         return (
             likes.reverse().slice(0, 1).map((like) => {
                 return (
-                    <p key={like._id} className={styles.likes}>{like.username}{moreLikes}</p>
+                    <p key={like._id} className={styles.likes}>{like.username}{likes}</p>
+                );
+            })
+        );
+    }
+
+    renderNominations() {
+        const {
+            nominations
+        } = this.state;
+
+        if (nominations.length === 0) {
+            return (
+                <div className={styles.likes}>Nobody voted yet!</div>
+            )
+        }
+
+        //let moreLikes = '';
+
+        // if (likes.length > 1) {
+        //     moreLikes = ` and ${likes.length - 1} more.`;
+        // }
+
+        return (
+            nominations.reverse().slice(0, 1).map((nomination) => {
+                return (
+                    <p key={nomination._id} className={styles.likes}>{nomination.username}{nomination}</p>
                 );
             })
         );
@@ -92,6 +117,25 @@ class EmployeeDetailsPage extends Component {
             if (result) {
                 this.setState({
                     likes: result.likes
+                })
+            }
+        })
+    }
+
+    nominate = () => {
+        const id = this.props.match.params.id;;
+        fetch(`http://localhost:9999/api/employee/nominate/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Auth': getCookie('x-auth-token')
+            }
+        }).then(response => {
+            return response.json();
+        }).then(result => {
+            if (result) {
+                this.setState({
+                    nominations: result.nomination
                 })
             }
         })
@@ -137,22 +181,22 @@ class EmployeeDetailsPage extends Component {
 
             if (createdBy.username !== username) {
 
-                const likedAlready = this.likedOrNot();
+                const isLiked = this.liked();
 
-                if (likedAlready) {
+                if (isLiked) {
                     return (
                         <div className={styles.liked}>You voted for this employee.</div>
                     );
                 }
 
                 return (
-                    <div className={styles['button-container']}>
+                    <div className={styles.container}>
                         <Button text="Like" onClick={this.like} type="detail" />
                     </div>
                 );
             }
             return (
-                <div className={styles['button-container']}>
+                <div className={styles.button}>
                     <Button text="Edit" onClick={this.edit} type="detail" />
                     {deleteClick
                         ?

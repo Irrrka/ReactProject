@@ -29,17 +29,11 @@ class EmployeesPage extends Component {
 
         employees.sort((a, b) => b.likes.length - a.likes.length);
 
-        if (employees.length === 0) {
-            return (
-                <Error text="Sorry, there aren't any posted employees at the moment" type="no-data"/>
-            );
-        }
-
         return (
-            <div className={styles[`book-container`]}>
+            <div className={styles.container}>
                 {employees.map(employee => {
                     return (
-                        <Employee key={employee._id} page="all" {...employee} />
+                        <Employee key={employee._id} {...employee} />
                     );
                 })}
             </div>
@@ -56,8 +50,8 @@ class EmployeesPage extends Component {
         } = this.state;
 
         return (
-            <PageLayout footer={footerType}>
-                <Title text="All Posted employees" />
+            <PageLayout>
+                <Title text="All Employees available in Your Company" />
                 {this.renderEmployees()}
             </PageLayout>
         );

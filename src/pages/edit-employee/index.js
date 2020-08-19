@@ -67,8 +67,8 @@ const EditEmployeePage = () => {
 
     return (
         <PageLayout>
-            <form className={styles['employee-form']} onSubmit={onSubmit}>
-                <Title text="Edit employee" />
+            <form className={styles.container} onSubmit={onSubmit}>
+                <Title text="Edit Employee" />
 
                 <div className={styles['input-field']}>
                     <Input
@@ -76,15 +76,6 @@ const EditEmployeePage = () => {
                         value={name}
                         placeholder="Name"
                         onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-
-                <div className={styles['input-field']}>
-                    <Input
-                        name="email"
-                        value={email}
-                        placeholder="Email"
-                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
 

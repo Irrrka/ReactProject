@@ -1,7 +1,19 @@
-.book-container{
-    margin-left: 10%;
+.container {
+    width: 400px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-bottom: 50px;
+    border: 1px solid #d884a4;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 5%;
+    text-align: center;
 }
 
-.no-books{
-    margin-top: 10%;
+.submit {
+    margin-top: 50px;
+}
+
+.input-field{
+    margin-top: 50px;
 }

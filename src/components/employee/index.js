@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './index.module.css';
 import image from '../../images/profile.jpg'
+import LinkComponent from '../link';
 
 const Employee = ({ _id, name, email, likes, position }) => {
 
     return (
-        < div key={_id} className={styles.employee} >
+        < div key={_id} className={styles.container} >
             <img className={styles.image} src={image} alt="employee" />
             <h2>{name}</h2>
             <div className={styles.likes}>Likes: {likes.length}</div>

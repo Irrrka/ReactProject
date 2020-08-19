@@ -2,8 +2,9 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Employee.find().sort('-created_at')
-            .then((employee) => res.send(employee))
+        models.Employee.find()
+        //.sort('-created_at')
+            .then((employee) => {res.send(employee)})
             .catch(next);
     },
 
@@ -22,7 +23,6 @@ module.exports = {
             position,
         } = req.body;
         const { _id } = req.user;
-console.log(req)
         models.Employee.create({ name, email, position, createdBy: _id })
             .then((createdEmployee) => {
                 return Promise.all([
@@ -31,7 +31,6 @@ console.log(req)
                 ]);
             })
             .then(([modifiedObj, obj]) => {
-                console.log("obj " + obj)
                 res.send(obj);
             })
             .catch(next);

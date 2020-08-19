@@ -1,14 +1,13 @@
-/* 
-.title {
-  text-align: center;
-  color: #234465;
-  text-decoration: underline;
-  margin-bottom: 2%;
-} */
-
 .page-title {
   padding-top: 1%;
   text-align: center;
   display: block;
-  color: #3a71a8;
+}
+
+.page-title:after {
+  content: ""; 
+  display: block; 
+  margin: 0 auto; 
+  width: 30%; 
+  padding-top: 20px; 
 }

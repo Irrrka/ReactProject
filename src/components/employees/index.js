@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import PageLayout from '../../components/page-layout';
 import PageTitle from '../../components/title';
 import styles from './index.module.css';
-import AlertMsg from '../../components/error';
+import Error from '../../components/error';
 import Title from '../../components/title';
 import Employee from '../employee';
+import About from '../../pages/about';
 
 class Employees extends Component {
     constructor(props) {
@@ -28,17 +29,25 @@ class Employees extends Component {
             employees
         } = this.state;
 
-        employees.sort((a, b) => b.likes.length - a.likes.length);
+        employees.sort((a, b) => b.nominations.length - a.nominations.length);
 
-        return (
-            <div className={styles.container}>
-                {employees.map(employee => {
-                    return (
-                        <Employee key={employee._id} {...employee} />
-                    );
-                })}
-            </div>
-        );
+        if (!employees) {
+            return (
+                <About />
+            )
+        } else {
+            
+            return (
+               <div>
+                    <Title title="All Employees" />
+                    {employees.map(employee => {
+                        return (
+                            <Employee key={employee._id} {...employee} />
+                        );
+                    })}
+                </div>
+            );
+        }
     }
 
     componentDidMount() {
@@ -46,15 +55,10 @@ class Employees extends Component {
     }
 
     render() {
-        let {
-            employees
-        } = this.state;
-
         return (
-            <PageLayout>
-                <Title title="All Employees" />
+            <div className={styles.container}>
                 {this.renderEmployees()}
-            </PageLayout>
+            </div>
         );
     }
 }

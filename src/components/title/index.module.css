@@ -1,13 +1,5 @@
-.page-title {
+.title {
   padding-top: 1%;
   text-align: center;
   display: block;
-}
-
-.page-title:after {
-  content: ""; 
-  display: block; 
-  margin: 0 auto; 
-  width: 30%; 
-  padding-top: 20px; 
 }

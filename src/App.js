@@ -3,7 +3,7 @@ import UserContext from './Context';
 import getCookie from './utils/cookie';
 
 
-class Auth extends Component {
+class App extends Component {
     constructor(props) {
         super(props);
 
@@ -21,7 +21,8 @@ class Auth extends Component {
     }
 
     logout = () => {
-        document.cookie = 'x-auth-token= ;  expires = Thu, 01 Jan 1970 00:00:00 GMT';
+        //document.cookie = 'x-auth-token= ;  expires = Thu, 01 Jan 1970 00:00:00 GMT';
+        document.cookie = 'x-auth-token=';
         this.setState({
             logged: false,
             user: null
@@ -77,4 +78,4 @@ class Auth extends Component {
     }
 }
 
-export default Auth;
+export default App;

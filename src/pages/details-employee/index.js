@@ -5,6 +5,7 @@ import Title from '../../components/title';
 import Button from '../../components/button';
 import UserContext from '../../Context';
 import getCookie from '../../utils/cookie';
+import imageUrl from '../../images/profile.jpg';
 
 class EmployeeDetailsPage extends Component {
     static contextType = UserContext;
@@ -58,7 +59,7 @@ class EmployeeDetailsPage extends Component {
 
         if (likes.length === 0) {
             return (
-                <div className={styles.likes}>Nobody voted yet!</div>
+                <div className={styles.likes}>Nobody liked yet!</div>
             )
         }
 
@@ -79,12 +80,13 @@ class EmployeeDetailsPage extends Component {
 
     renderNominations() {
         const {
-            nominations
+            nominations,
+            createdBy
         } = this.state;
 
         if (nominations.length === 0) {
             return (
-                <div className={styles.likes}>Nobody voted yet!</div>
+                <div className={styles.likes}>Nobody nominated yet!</div>
             )
         }
 
@@ -97,7 +99,7 @@ class EmployeeDetailsPage extends Component {
         return (
             nominations.reverse().slice(0, 1).map((nomination) => {
                 return (
-                    <p key={nomination._id} className={styles.likes}>{nomination.username}{nomination}</p>
+                    <p key={nomination._id} className={styles.field}>{createdBy.username}{nomination}</p>
                 );
             })
         );
@@ -145,13 +147,13 @@ class EmployeeDetailsPage extends Component {
         this.props.history.push(`/edit/${this.props.match.params.id}`)
     }
 
-    delete = () => {
-        this.setState({
-            deleteClick: true
-        });
-    }
+    // delete = () => {
+    //     this.setState({
+    //         deleteClick: true
+    //     });
+    // }
 
-    deleteConfirmed = () => {
+    delete = () => {
         const id = this.props.match.params.id;;
         fetch(`http://localhost:9999/api/employee/${id}`, {
             method: 'DELETE',
@@ -198,11 +200,8 @@ class EmployeeDetailsPage extends Component {
             return (
                 <div className={styles.button}>
                     <Button text="Edit" onClick={this.edit} type="detail" />
-                    {deleteClick
-                        ?
-                        <Button text="Click again" onClick={this.deleteConfirmed} type="detail" />
-                        :
-                        <Button text="Delete" onClick={this.delete} type="detail" />}
+                    <Button text="Delete" onClick={this.delete} type="detail" />
+                       
                 </div>
             );
 
@@ -221,27 +220,25 @@ class EmployeeDetailsPage extends Component {
             name,
             email,
             position,
-            opinion,
-            createdBy
+            createdBy,
         } = this.state;
 
         return (
             <PageLayout>
                 <Title text="Employee" />
                
-                < div className={styles[`book-container`]} >
+                <div className={styles.container} >
 
-                    <div className={styles['img-container']}>
-                        {/* <img className={styles[`book-cover`]} src={imageUrl} alt="Book" /> */}
+                    <div className={styles.details}>
+                        <Title title={name} />
+                        <div className={styles.buttons}>{this.renderButtons()}</div>
+                        <div className={styles.field}>Added by: <i><b>{createdBy.username}</b></i></div>
+                        <div className={styles.field}>Email: <i><b>{email}</b></i></div>
+                        <div className={styles.field}>Position: <i><b>{position}</b></i></div>
+                        <div className={styles.field}>Liked by: <i><b>{this.renderLikes()}</b></i></div>
                     </div>
-
-                    <div className={styles['data-container']}>
-                        <h1>{name}</h1>
-                        <div className={styles.likes}>Liked by: {this.renderLikes()}</div>
-                        <div className={styles['detail-buttons']}>{this.renderButtons()}</div>
-                        <div className={styles.field}>Posted by: {createdBy.username}</div>
-                        <div className={styles.field}>Email: {email}</div>
-                        <div className={styles.field}>Position: {position}</div>
+                    <div className={styles.details}>
+                        {/* Nominationed by: <i><b>{this.renderNominations()}</b></i> */}
                     </div>
                 </div >
 

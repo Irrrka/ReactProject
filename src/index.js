@@ -2,16 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Navigation from './Navigation';
-import Auth from './Auth';
+import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Auth >
+    <App>
       <BrowserRouter>
         <Navigation />
       </BrowserRouter>
-    </Auth>
+    </App>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -9,7 +9,7 @@ module.exports = {
     },
 
     getDetails: (req, res, next) => {
-        models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('likes', 'username', 'nominations')
+        models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('username')
             .then((employee) => {
                 res.send(employee)
             })
@@ -72,7 +72,7 @@ module.exports = {
             nomination,
             } = req.body;
 
-        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { nominations: nomination } }, { new: true, useFindAndModify: false }).populate('nominations', 'username')
+        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { nominations: nomination } }, { new: true, useFindAndModify: false }).populate('username')
             .then((updatedEmployee) => {
                 res.send(updatedEmployee)
             })

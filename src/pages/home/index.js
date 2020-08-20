@@ -10,6 +10,7 @@ import EmployeesPage from '../all-employees';
 
 class HomePage extends Component {
   static contextType = UserContext;
+  
   constructor(props) {
     super(props);
 

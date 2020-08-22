@@ -10,6 +10,16 @@
   border-top: 1px solid #d884a4;
 }
 
+
+.btn {
+  width: 20%;
+  height: 60px;
+  background-color: #3a71a8;
+  color: white;
+  position: fixed;
+  top: 0;
+}
+
 .logo {
   width: 80px;
   height: auto;

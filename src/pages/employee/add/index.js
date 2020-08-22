@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import PageLayout from '../../components/page-layout';
-import Title from '../../components/title';
-import Input from '../../components/input';
-import Button from '../../components/button';
-import Error from '../../components/error';
+import Container from '../../../components/container';
+import Title from '../../../components/title';
+import Input from '../../../components/input';
+import Button from '../../../components/button';
+import Error from '../../../components/error';
 import styles from './index.module.css';
-import UserContext from '../../Context';
-import getCookie from '../../utils/cookie';
-import validate from '../../utils/validator';
+import UserContext from '../../../Context';
+import getCookie from '../../../utils/cookie';
+import validate from '../../../utils/validator';
 import { withRouter } from 'react-router-dom';
 
 class AddEmployeePage extends Component {
@@ -54,7 +54,7 @@ class AddEmployeePage extends Component {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Auth': getCookie('x-auth-token')
+                'Authorization': getCookie('x-auth-token')
             }
         }).then(response => {
             if (response) {
@@ -73,10 +73,9 @@ class AddEmployeePage extends Component {
             errors
         } = this.state;
         return (
-            <PageLayout>
+            <Container>
                 <form className={styles.container} onSubmit={this.onSubmit}>
-                    <Title text="Add an Employee to our endorce system" />
-
+                    <Title title="Add Employee to the Endorce system" />
                     <div className={styles.input}>
                         <Input
                             name="name"
@@ -110,7 +109,7 @@ class AddEmployeePage extends Component {
                         <Button text="Add" type="submit" />
                     </div>
                 </form >
-            </PageLayout >
+            </Container >
         );
     }
 }

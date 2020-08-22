@@ -6,6 +6,6 @@ module.exports = (app) => {
 
     app.use('/api/employee', router.employee);
 
-    app.use('*', (req, res, next) => res.send('<h1> Something went wrong.</h1>'))
+    app.use('*', (req, res, next) => res.send('<h1> Something went wrong!</h1>'))
 
 };

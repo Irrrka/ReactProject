@@ -9,6 +9,7 @@ module.exports = {
         models.User.findById(req.query.id).populate('employees')
             .then((result) => {
                 const user = {
+                    id: result.id,
                     username: result.username,
                     employees: result.employees
                 }
@@ -23,7 +24,7 @@ module.exports = {
             models.User.create({ username, password })
                 .then((createdUser) => {
                     const token = utils.jwt.createToken({ id: createdUser._id });
-                    res.header('auth', token).send(createdUser);
+                    res.header('Authorization', token).send(createdUser);
                 })
                 .catch((e) => {
                     if (e.code === 11000) {
@@ -76,7 +77,7 @@ module.exports = {
                     }
 
                     const token = utils.jwt.createToken({ id: user._id });
-                    res.header('auth', token).send(user);
+                    res.header('Authorization', token).send(user);
                 })
                 .catch(next);
         },

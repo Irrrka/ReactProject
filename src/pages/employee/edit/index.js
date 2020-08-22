@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Title from '../../components/title'
-import PageLayout from '../../components/page-layout'
-import Input from '../../components/input'
-import Error from '../../components/error'
-import Button from '../../components/button'
-import styles from '../add-employee/index.module.css';
-import validate from '../../utils/validator'
-import getCookie from '../../utils/cookie'
+import Title from '../../../components/title'
+import Container from '../../../components/container'
+import Input from '../../../components/input'
+import Error from '../../../components/error'
+import Button from '../../../components/button'
+import styles from './index.module.css';
+import validate from '../../../utils/validator'
+import getCookie from '../../../utils/cookie'
+import { withRouter } from 'react-router-dom';
 
 const EditEmployeePage = () => {
     const [name, setName] = useState('');
@@ -66,11 +67,11 @@ const EditEmployeePage = () => {
     }, [getEmployee]);
 
     return (
-        <PageLayout>
+        <Container>
             <form className={styles.container} onSubmit={onSubmit}>
-                <Title text="Edit Employee" />
+                <Title title="Edit Employee" />
 
-                <div className={styles['input-field']}>
+                <div className={styles.input}>
                     <Input
                         name="name"
                         value={name}
@@ -79,7 +80,7 @@ const EditEmployeePage = () => {
                     />
                 </div>
 
-                <div className={styles['input-field']}>
+                <div className={styles.input}>
                     <Input
                         name="position"
                         value={position}
@@ -97,8 +98,8 @@ const EditEmployeePage = () => {
                 </div>
 
             </form >
-        </PageLayout >
+        </Container >
     );
 }
 
-export default EditEmployeePage;
+export default withRouter(EditEmployeePage);

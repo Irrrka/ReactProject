@@ -2,23 +2,19 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './index.module.css';
 import image from '../../images/profile.jpg'
-import LinkComponent from '../link';
 
-const Employee = ({ _id, name, email, likes, position }) => {
+const Employee = ({ _id, name, email, position, nominations}) => {
 
     return (
-        < div key={_id} className={styles.container} >
-            <img className={styles.image} src={image} alt="employee" />
-            <h2>{name}</h2>
-            <div className={styles.likes}>Likes: {likes.length}</div>
-            <div>Email: {email}</div>
-            <div>Position: {position}</div>
-            <div className={styles.detailsBtn}>
-                <Link to={`/details/${_id}`}  >
-                    <p className={styles.detailsBtnText}>View Details</p>
-                </Link>
-            </div>
-        </div >
+        <Link to={`/details/${_id}`}>
+            <div key={_id} className={styles.container} >
+            <span className={styles.name}><h2><i>{name}</i></h2></span>
+                <img className={styles.image} src={image} alt="employee" />
+                <div className={styles.nominations}><i><b>Nominations: </b></i> {nominations.length}</div>
+                <div><i><b>Email: </b></i> {email}</div>
+                <div><i><b>Position: </b></i>{position}</div>
+            </div >
+        </Link>
     );
 }
 

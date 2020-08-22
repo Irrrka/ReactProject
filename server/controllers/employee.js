@@ -2,7 +2,7 @@ const models = require('../models');
 
 module.exports = {
     get: (req, res, next) => {
-        models.Employee.find()
+        models.Employee.find().populate('createdBy')
         //.sort('-created_at')
             .then((employee) => {res.send(employee)})
             .catch(next);
@@ -55,27 +55,15 @@ module.exports = {
             .catch(next)
     },
 
-    like: (req, res, next) => {
+    nominate: (req, res, next) => {
         const id = req.params.id;
         const { _id } = req.user;
 
-        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { likes: _id } }, { new: true, useFindAndModify: false }).populate('likes', 'username')
+        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { nominations: _id } }, { new: true, useFindAndModify: false }).populate('nominations', 'username')
             .then((updatedEmployee) => {
                 res.send(updatedEmployee)
             })
             .catch(next);
     },
 
-    nominate: (req, res, next) => {
-        const id = req.params.id;
-        const {
-            nomination,
-            } = req.body;
-
-        models.Employee.findByIdAndUpdate({ _id: id }, { $push: { nominations: nomination } }, { new: true, useFindAndModify: false }).populate('username')
-            .then((updatedEmployee) => {
-                res.send(updatedEmployee)
-            })
-            .catch(next);
-    }
 };

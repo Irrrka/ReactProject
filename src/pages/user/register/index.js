@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import PageLayout from '../../components/page-layout';
-import Title from '../../components/title';
-import Input from '../../components/input';
-import Button from '../../components/button';
-import Error from '../../components/error';
+import Container from '../../../components/container';
+import Title from '../../../components/title';
+import Input from '../../../components/input';
+import Button from '../../../components/button';
+import UserContext from '../../../Context';
 import styles from './index.module.css';
-import UserContext from '../../Context';
+import Error from '../../../components/error';
 import { withRouter } from 'react-router-dom';
 
 
-class LoginPage extends Component {
-
+class RegisterPage extends Component {
     static contextType = UserContext;
 
     constructor(props) {
@@ -19,24 +18,28 @@ class LoginPage extends Component {
         this.state = {
             username: '',
             password: '',
+            rePassword: '',
             errors: []
-        };
+        }
     }
 
     validate() {
         const {
             username,
-            password
+            password,
+            rePassword
         } = this.state;
 
         const errors = [];
 
-        if (username.length === 0) {
-            errors.push('Please add Company name');
+        if (username.length < 3) {
+            errors.push('Company\'s name must be at least 3 characters long');
         }
-
-        if (password.length === 0) {
-            errors.push('Please add password');
+        if (password.length < 3) {
+            errors.push('Password must be at least 3 characters long');
+        }
+        if (password !== rePassword) {
+            errors.push('Passwords don\'t match');
         }
 
         if (errors.length > 0) {
@@ -47,7 +50,7 @@ class LoginPage extends Component {
         return false;
     }
 
-    onChange = (e, type) => {
+    onChange(e, type) {
         const newState = {};
         newState[type] = e.target.value;
         this.setState(newState);
@@ -63,10 +66,10 @@ class LoginPage extends Component {
         const hasErrors = this.validate();
 
         if (hasErrors) {
-            return
+            return;
         }
 
-        fetch('http://localhost:9999/api/user/login', {
+        fetch('http://localhost:9999/api/user/register', {
             method: 'POST',
             body: JSON.stringify({
                 username,
@@ -79,13 +82,17 @@ class LoginPage extends Component {
             const token = response.headers.get('auth');
             if (token) {
                 document.cookie = `x-auth-token=${token}`;
-            } else {
-                this.setState({
-                    errors: ['Unauthorized']
-                })
             }
             return response.json();
         }).then(result => {
+
+            if (result.error) {
+                this.setState({
+                    errors: [result.error]
+                });
+                return
+            }
+
             if (result.username) {
                 const user = {
                     _id: result._id,
@@ -93,6 +100,8 @@ class LoginPage extends Component {
                     employees: result.employees,
                 };
                 this.context.login(user);
+                this.context.user = user;
+                this.context.id = user._id;
                 this.props.history.push('/');
             }
         })
@@ -102,45 +111,53 @@ class LoginPage extends Component {
         const {
             username,
             password,
+            rePassword,
             errors
         } = this.state;
 
         return (
-            <PageLayout footer="form">
+            <Container>
                 <form className={styles.container} onSubmit={this.onSubmit}>
-                    <Title text="Login" />
-                    <div className={styles['input-field']}>
+                    <Title title="Register your Company to the Endorce system" />
+                    <div className={styles.input}>
                         <Input
-                            type="text"
                             name="username"
                             value={username}
-                            placeholder="Company"
+                            placeholder="Company name"
                             onChange={(e) => this.onChange(e, 'username')}
                         />
                     </div>
 
-                    <div className={styles['input-field']}>
+                    <div className={styles.input}>
                         <Input
                             type="password"
                             name="password"
                             value={password}
                             placeholder="Password"
                             onChange={(e) => this.onChange(e, 'password')}
-                            className={styles['input-field']}
+                            className={styles.input}
                         />
                     </div>
-
+                    <div className={styles.input}>
+                        <Input
+                            type="password"
+                            name="rePassword"
+                            value={rePassword}
+                            placeholder="Confirm Password"
+                            onChange={(e) => this.onChange(e, 'rePassword')}
+                            className={styles.input}
+                        />
+                    </div>
                     {errors.map(error => (
                         <Error key={error} text={error} type="error" />
                     ))}
-
                     <div className={styles.submit}>
-                        <Button text="Login" type="submit" />
+                        <Button text="Register" type="submit" />
                     </div>
                 </form>
-            </PageLayout>
+            </Container>
         );
     }
 }
 
-export default withRouter(LoginPage);
+export default withRouter(RegisterPage);

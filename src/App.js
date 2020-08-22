@@ -8,7 +8,7 @@ class App extends Component {
         super(props);
 
         this.state = {
-            logged: null,
+            logged: false,
             user: null
         };
     }
@@ -21,8 +21,7 @@ class App extends Component {
     }
 
     logout = () => {
-        //document.cookie = 'x-auth-token= ;  expires = Thu, 01 Jan 1970 00:00:00 GMT';
-        document.cookie = 'x-auth-token=';
+        document.cookie = 'x-auth-token= ;  expires = Thu, 01 Jan 1970 00:00:00 GMT';
         this.setState({
             logged: false,
             user: null
@@ -41,7 +40,7 @@ class App extends Component {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Auth': token
+                'Authorization': token
             }
         }).then(response => {
             return response.json();

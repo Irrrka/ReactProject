@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-import PageLayout from '../../components/page-layout';
-import PageTitle from '../../components/title';
-import styles from './index.module.css';
-import Error from '../../components/error';
 import Title from '../../components/title';
+import styles from './index.module.css';
 import Employee from '../employee';
-import About from '../../pages/about';
+import About from '../about';
 
 class Employees extends Component {
     constructor(props) {
@@ -17,15 +14,19 @@ class Employees extends Component {
     }
 
     getEmployees = async () => {
-        const response = await fetch('http://localhost:9999/api/employee');
-        const employees = await response.json();
+        const promise = await fetch('http://localhost:9999/api/employee');
+        const response = await promise.json();
         this.setState({
-          employees
+          employees: response
         });
     }
 
+    componentDidMount() {
+        this.getEmployees();
+    }
+
     renderEmployees() {
-        let {
+        const {
             employees
         } = this.state;
 
@@ -36,7 +37,6 @@ class Employees extends Component {
                 <About />
             )
         } else {
-            
             return (
                <div>
                     <Title title="All Employees" />
@@ -50,9 +50,6 @@ class Employees extends Component {
         }
     }
 
-    componentDidMount() {
-        this.getEmployees();
-    }
 
     render() {
         return (

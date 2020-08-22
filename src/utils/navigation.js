@@ -1,23 +1,18 @@
 const getLinks = (logged, user) => {
-    
-  const userLinks = [
+
+  const authLinks = [
       {
           title: 'Home',
-          href: '/'
+          href: '/',
       },
       {
           title: 'Add Employee',
-          href: '/create'
+          href: '/create',
       },
       {
           title: 'Profile',
-          href: `/profile/${user && user._id}`
+          href: `/profile/${user && user.id}`,
       },
-      {
-          title: 'Logout',
-          href: '/'
-      },
-      
   ];
   
   const guestLinks = [
@@ -34,12 +29,11 @@ const getLinks = (logged, user) => {
           href: '/register'
       },
   ];
-
   if (logged){
-      return userLinks;
-  }
+    return authLinks;
+}
+return guestLinks;
 
-  return guestLinks;
 }
 
 export default getLinks;

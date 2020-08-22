@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import PageLayout from '../../components/page-layout';
+import Container from '../../../components/container';
 import styles from './index.module.css';
-import Title from '../../components/title';
-import Button from '../../components/button';
-import UserContext from '../../Context';
-import getCookie from '../../utils/cookie';
-import imageUrl from '../../images/profile.jpg';
+import Title from '../../../components/title';
+import Button from '../../../components/button';
+import UserContext from '../../../Context';
+import getCookie from '../../../utils/cookie';
+import image from '../../../images/profile.jpg';
+import { withRouter } from 'react-router-dom';
 
 class EmployeeDetailsPage extends Component {
     static contextType = UserContext;
@@ -44,9 +45,10 @@ class EmployeeDetailsPage extends Component {
     }
 
     getEmployee = async () => {
-        const id = this.props.match.params.id;
+        const id = this.props.match.params._id;
         const response = await fetch(`http://localhost:9999/api/employee/details/?id=${id}`);
         const employee = await response.json();
+        console.log(employee)
         this.setState({
             ...employee
         });
@@ -224,7 +226,7 @@ class EmployeeDetailsPage extends Component {
         } = this.state;
 
         return (
-            <PageLayout>
+            <Container>
                 <Title text="Employee" />
                
                 <div className={styles.container} >
@@ -242,9 +244,9 @@ class EmployeeDetailsPage extends Component {
                     </div>
                 </div >
 
-            </PageLayout>
+            </Container>
         )
     }
 }
 
-export default EmployeeDetailsPage;
+export default withRouter(EmployeeDetailsPage);

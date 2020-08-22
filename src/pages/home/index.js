@@ -1,19 +1,14 @@
-import React, { Component, useState } from 'react';
-import Employee from '../../components/employee';
-import Title from '../../components/title';
-import PageLayout from '../../components/page-layout'
-import UserContext from '../../Context'
-import Error from '../../components/error';
-import styles from './index.module.css';
-import About from '../about';
-import EmployeesPage from '../all-employees';
+import React from 'react';
+import Container from '../../components/container'
+import About from '../../components/about';
+import Employees from '../employee/all';
 
 const HomePage = () => {
       return (
-        <PageLayout>
+        <Container>
           <About/>
-          <EmployeesPage />
-        </PageLayout>
+          <Employees />
+        </Container>
       );
 }
 

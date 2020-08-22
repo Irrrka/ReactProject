@@ -1,11 +1,9 @@
 .container {
     width: 400px;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-bottom: 150px;
+    padding: 20px;
     border: 1px solid #d884a4;
     margin: auto;
-    margin-top: 4%;
+    margin-top: 5%;
     margin-bottom: 5%;
     text-align: center;
 }
@@ -14,6 +12,6 @@
     margin-top: 50px;
 }
 
-.input-field{
+.input{
     margin-top: 50px;
 }

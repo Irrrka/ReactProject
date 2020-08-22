@@ -1,8 +1,6 @@
 .container {
     width: 400px;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-bottom: 50px;
+    padding: 80px;
     border: 1px solid #d884a4;
     margin: auto;
     margin-top: 4%;

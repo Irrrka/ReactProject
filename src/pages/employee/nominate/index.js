@@ -1,17 +1,21 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
-import Title from '../../../components/title';
-import Container from '../../../components/container';
-import Error from '../../../components/error';
-import Button from '../../../components/button';
+import Title from '../../../components/title'
+import Container from '../../../components/container'
+import Input from '../../../components/input'
+import Error from '../../../components/error'
+import Button from '../../../components/button'
 import styles from './index.module.css';
-import validate from '../../../utils/validator';
-import getCookie from '../../../utils/cookie';
+import validate from '../../../utils/validator'
+import getCookie from '../../../utils/cookie'
 import { withRouter } from 'react-router-dom';
 
 const NominateEmployeePage = () => {
-    const [nomination, setNomination] = useState('');
-    const [errors, setErrors] = useState([]);
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [position, setPosition] = useState('');
+    const [error, setError] = useState([]);
+    const [nominations, setNominations] = useState([]);
     const params = useParams();
     const history = useHistory();
 
@@ -23,24 +27,23 @@ const NominateEmployeePage = () => {
         }
         const employee = await response.json();
 
-        setNomination(employee.nominations);
+        setName(employee.name);
+        setEmail(employee.email);
+        setPosition(employee.position);
+        setNominations(employee.nominations);
     }, [params.id, history]);
 
-    const handleSubmit = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
-        
-    if (nomination.length < 10) {
-        errors.push('Nomination cannot be less than 10 symbols!');
-    }
 
         fetch(`http://localhost:9999/api/employee/nominate/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                nominations:nomination,
+                nominations
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Auth': getCookie('x-auth-token')
+                'Authorizations': getCookie('x-auth-token')
             }
         }).then(response => {
             if (response) {
@@ -57,17 +60,15 @@ const NominateEmployeePage = () => {
     }, [getEmployee]);
 
     return (
-        <Container>
-            <form onSubmit={handleSubmit}>
-                <div className={styles.container} >
-                <Title title="Recognize a colleague!" />
-                <textarea className={styles.input} defaultValue="Recognize your colleague's accomplishments">
-                </textarea>
-                </div>
-                {errors.map(error => (
-                    <Error key={error} text={error} type="error" />
-                ))}
 
+        <Container>
+            <form className={styles.container} onSubmit={onSubmit}>
+                <Title title="Recognize a colleague!" />
+                <div className={styles.input}>
+                    <textarea className={styles.input} defaultValue="Recognize your colleague's accomplishments">
+                    </textarea>
+                </div>
+                <Error key={error} text={error} type="error" />
                 <div className={styles.submit}>
                     <Button text="Send" type="submit" />
                 </div>

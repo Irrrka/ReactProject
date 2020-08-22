@@ -7,7 +7,7 @@ import RegisterPage from './pages/user/register';
 import LoginPage from './pages/user/login';
 import ProfilePage from './pages/user/profile';
 import AddEmployeePage from './pages/employee/add';
-import EmployeeDetailsPage from './pages/employee/details/indexxx';
+import EmployeeDetailsPage from './pages/employee/details/index';
 import EditEmployeePage from './pages/employee/edit';
 import NominateEmployeePage from './pages/employee/nominate';
 import UserContext from './Context';

@@ -5,8 +5,6 @@ import Title from '../../../components/title';
 import Button from '../../../components/button';
 import UserContext from '../../../Context';
 import getCookie from '../../../utils/cookie';
-import image from '../../../images/profile.jpg';
-import { withRouter } from 'react-router-dom';
 
 class EmployeeDetailsPage extends Component {
     static contextType = UserContext;
@@ -45,10 +43,10 @@ class EmployeeDetailsPage extends Component {
     }
 
     getEmployee = async () => {
-        const id = this.props.match.params._id;
+        console.log(this.props.match.params.id);
+        const id = this.props.match.params.id;
         const response = await fetch(`http://localhost:9999/api/employee/details/?id=${id}`);
         const employee = await response.json();
-        console.log(employee)
         this.setState({
             ...employee
         });
@@ -175,7 +173,6 @@ class EmployeeDetailsPage extends Component {
     renderButtons() {
         const {
             createdBy,
-            deleteClick
         } = this.state;
 
         if (this.context.logged) {
@@ -208,8 +205,6 @@ class EmployeeDetailsPage extends Component {
             );
 
         }
-
-
     }
 
     componentDidMount() {
@@ -249,4 +244,4 @@ class EmployeeDetailsPage extends Component {
     }
 }
 
-export default withRouter(EmployeeDetailsPage);
+export default EmployeeDetailsPage;

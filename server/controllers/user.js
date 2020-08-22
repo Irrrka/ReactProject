@@ -36,8 +36,8 @@ module.exports = {
         },
 
         verifyLogin: (req, res, next) => {
-            const token = req.headers.auth || '';
-
+            console.log(req.headers)
+            const token = req.headers.authorization || '';
             Promise.all([
                 utils.jwt.verifyToken(token),
                 models.TokenBlacklist.findOne({ token })
@@ -54,7 +54,6 @@ module.exports = {
                         });
                 })
                 .catch(err => {
-
                     if (['token expired', 'blacklisted token', 'jwt must be provided'].includes(err.message)) {
                         res.status(401).send('UNAUTHORIZED!');
                         return;

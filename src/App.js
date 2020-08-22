@@ -30,27 +30,29 @@ class App extends Component {
 
     componentDidMount() {
         const token = getCookie('x-auth-token');
-
+//console.log("token"+token);
         if (!token) {
             this.logout();
             return;
         }
 
         fetch('http://localhost:9999/api/user/verify', {
-            method: 'POST',
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': token
             }
+        }).then(promise => {
+            return promise.json();
+            console.log(promise)
         }).then(response => {
-            return response.json();
-        }).then(result => {
-            if (result.status) {
+            if (response.status) {
                 const user = {
-                    _id: result.user._id,
-                    username: result.user.username,
-                    employees: result.user.employees,
+                    _id: response.user._id,
+                    username: response.user.username,
+                    employees: response.user.employees,
                 };
+                console.log("user"+user)
                 this.login(user);
             } else {
                 this.logout();

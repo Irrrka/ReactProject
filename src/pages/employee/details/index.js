@@ -83,7 +83,7 @@ class EmployeeDetailsPage extends Component {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Auth': getCookie('x-auth-token')
+                'Authorization': getCookie('x-auth-token')
             }
         }).then(response => {
             return response.json();
@@ -102,7 +102,7 @@ class EmployeeDetailsPage extends Component {
     //         method: 'PUT',
     //         headers: {
     //             'Content-Type': 'application/json',
-    //             'Auth': getCookie('x-auth-token')
+    //             'Authorization': getCookie('x-auth-token')
     //         }
     //     }).then(response => {
     //         return response.json();

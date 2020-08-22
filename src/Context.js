@@ -7,4 +7,4 @@ const UserContext = React.createContext({
     logout: () => {},
 });
 
-export default UserContext;
+export default UserContext; 

@@ -79,7 +79,7 @@ class RegisterPage extends Component {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
-            const token = response.headers.get('auth');
+            const token = response.headers.get('Authorization');
             if (token) {
                 document.cookie = `x-auth-token=${token}`;
             }

@@ -23,6 +23,8 @@ module.exports = {
             position,
         } = req.body;
         const { _id } = req.user;
+        console.log("user" + req.user)
+        
         models.Employee.create({ name, email, position, createdBy: _id })
             .then((createdEmployee) => {
                 return Promise.all([

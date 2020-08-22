@@ -50,7 +50,7 @@ const EditEmployeePage = () => {
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Auth': getCookie('x-auth-token')
+                'Authorization': getCookie('x-auth-token')
             }
         }).then(response => {
             if (response) {

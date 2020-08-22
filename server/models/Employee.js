@@ -21,7 +21,8 @@ const employeeSchema = new Schema({
     },
     
     nominations: [{
-        type: String,
+        type: ObjectId,
+        ref: "User"
     }],
 
     createdBy: {

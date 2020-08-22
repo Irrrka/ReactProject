@@ -50,7 +50,7 @@ class ProfilePage extends Component {
         <div className={styles.container}>
         <Title title="Profile" />
           <div className={styles.ininputout}>
-          <i>Your Company <b>{username}</b> has already <b>{employees.length}</b>  employees!
+          <i>Your Company <b>{username}</b> has already <b>{employees.length}</b>  employee(s)!
           </i></div>
       </div>
       <div className={styles.submit}>

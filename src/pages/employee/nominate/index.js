@@ -11,56 +11,53 @@ import getCookie from '../../../utils/cookie'
 import { withRouter } from 'react-router-dom';
 
 const NominateEmployeePage = () => {
-    const [name, setName] = useState('');
-    const [email, setEmail] = useState('');
-    const [position, setPosition] = useState('');
     const [error, setError] = useState([]);
-    const [nominations, setNominations] = useState([]);
+    const [nomination, setNomination] = useState([]);
     const params = useParams();
     const history = useHistory();
 
-    const getEmployee = useCallback(async () => {
-        const id = params.id;
-        const response = await fetch(`http://localhost:9999/api/employee/details/?id=${id}`);
-        if (response.status === 500) {
-            history.push('/');
-        }
-        const employee = await response.json();
+    // const getEmployee = useCallback(async () => {
+    //     const id = params.id;
+    //     const response = await fetch(`http://localhost:9999/api/employee/details/?id=${id}`);
+    //     if (response.status === 500) {
+    //         history.push('/');
+    //     }
+    //     const employee = await response.json();
 
-        setName(employee.name);
-        setEmail(employee.email);
-        setPosition(employee.position);
-        setNominations(employee.nominations);
-    }, [params.id, history]);
+    //     setNominations(employee.nominations);
+    // }, [params.id, history]);
 
     const onSubmit = (e) => {
         e.preventDefault();
 
+        if (nomination === '') {
+            setError('Nomination cannot be empty!');
+            return;
+        }
+
         fetch(`http://localhost:9999/api/employee/nominate/${params.id}`, {
             method: 'PUT',
             body: JSON.stringify({
-                nominations
+                nominations:{push:nomination}
             }),
             headers: {
                 'Content-Type': 'application/json',
                 'Authorizations': getCookie('x-auth-token')
             }
         }).then(response => {
-            if (response) {
-
-            }
             return response.json();
         }).then(result => {
+            if (result.status === 400) {
+                setError('Nomination text is required!');
+                return;
+            }
             history.push(`/details/${params.id}`);
+        }).catch(e => {
+            setError('Error');
         })
     }
 
-    useEffect(() => {
-        getEmployee();
-    }, [getEmployee]);
-
     return (
-
         <Container>
             <form className={styles.container} onSubmit={onSubmit}>
                 <Title title="Recognize a colleague!" />
@@ -68,11 +65,10 @@ const NominateEmployeePage = () => {
                     <textarea className={styles.input} defaultValue="Recognize your colleague's accomplishments">
                     </textarea>
                 </div>
-                <Error key={error} text={error} type="error" />
+                { error? <Error key={error} text={error} type="error" /> : null}
                 <div className={styles.submit}>
                     <Button text="Send" type="submit" />
                 </div>
-
             </form >
         </Container >
     );

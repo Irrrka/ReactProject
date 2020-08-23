@@ -21,25 +21,25 @@ class EmployeeDetailsPage extends Component {
         }
     }
 
-    nominated = () => {
-        const {
-            nominations
-        } = this.state;
+    // nominated = () => {
+    //     const {
+    //         nominations
+    //     } = this.state;
 
-        const {
-            username
-        } = this.context.user;
+    //     const {
+    //         username
+    //     } = this.context.user;
 
-        let isNominated = false;
+    //     let isNominated = false;
 
-        nominations.forEach(nomination => {
-            if (nomination.username === username) {
-                isNominated = true;
-            }
-        })
+    //     nominations.forEach(nomination => {
+    //         if (nomination.username === username) {
+    //             isNominated = true;
+    //         }
+    //     })
 
-        return isNominated;
-    }
+    //     return isNominated;
+    // }
 
     getEmployee = async () => {
         console.log(this.props.match.params.id);
@@ -58,43 +58,37 @@ class EmployeeDetailsPage extends Component {
 
         if (nominations.length === 0) {
             return (
-                <div className={styles.likes}>Nobody liked yet!</div>
+                <div className={styles.likes}>Nobody voted yet!</div>
             )
         }
 
-        //let moreLikes = '';
-
-        // if (likes.length > 1) {
-        //     moreLikes = ` and ${likes.length - 1} more.`;
-        // }
-
         return (
-            nominations.reverse().slice(0, 1).map((nomination) => {
+            nominations.map((nomination) => {
                 return (
-                    <p key={nomination._id} className={styles.field}>{nomination.username}{nominations}</p>
+                    <p key={nomination._id} className={styles.field}>{nomination.nomination}</p>
                 );
             })
         );
     }
 
-    like = () => {
-        const id = this.props.match.params.id;;
-        fetch(`http://localhost:9999/api/employee/like/${id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': getCookie('x-auth-token')
-            }
-        }).then(response => {
-            return response.json();
-        }).then(result => {
-            if (result) {
-                this.setState({
-                    likes: result.likes
-                })
-            }
-        })
-    }
+    // like = () => {
+    //     const id = this.props.match.params.id;;
+    //     fetch(`http://localhost:9999/api/employee/like/${id}`, {
+    //         method: 'PUT',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //             'Authorization': getCookie('x-auth-token')
+    //         }
+    //     }).then(response => {
+    //         return response.json();
+    //     }).then(result => {
+    //         if (result) {
+    //             this.setState({
+    //                 likes: result.likes
+    //             })
+    //         }
+    //     })
+    // }
 
     // nominate = () => {
     //     const id = this.props.match.params.id;;
@@ -151,25 +145,18 @@ class EmployeeDetailsPage extends Component {
 
             if (createdBy.username !== username) {
 
-                const isNominated = this.nominated();
-
-                if (isNominated) {
-                    return (
-                        <div className={styles.liked}>You voted for this employee.</div>
-                    );
-                }
-
                 return (
                     <div className={styles.button}>
                         <Button text="Nominate" onClick={this.nominate} />
                     </div>
                 );
             }
+
             return (
                 <div className={styles.button}>
                     <Button text="Edit" onClick={this.edit} type="detail" />
                     <Button text="Delete" onClick={this.delete} type="detail" />
-                       
+                    <Button text="Nominate" onClick={this.nominate} />
                 </div>
             );
 
@@ -180,12 +167,12 @@ class EmployeeDetailsPage extends Component {
         this.getEmployee();
     }
 
-
     render() {
         const {
             name,
             email,
             position,
+            nominations,
             createdBy,
         } = this.state;
 
@@ -201,10 +188,10 @@ class EmployeeDetailsPage extends Component {
                         <div className={styles.field}>Added by: <i><b>{createdBy.username}</b></i></div>
                         <div className={styles.field}>Email: <i><b>{email}</b></i></div>
                         <div className={styles.field}>Position: <i><b>{position}</b></i></div>
-                        <div className={styles.field}>Nominated by: <i><b>{this.renderNominations()}</b></i></div>
+                        
                     </div>
                     <div className={styles.details}>
-                        {/* Nominationed by: <i><b>{this.renderNominations()}</b></i> */}
+                        Nominationed by: <i><b>{this.renderNominations()}</b></i>
                     </div>
                 </div >
 

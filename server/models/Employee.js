@@ -22,7 +22,7 @@ const employeeSchema = new Schema({
     
     nominations: [{
         type: ObjectId,
-        ref: "User"
+        ref: "Nomination"
     }],
 
     createdBy: {

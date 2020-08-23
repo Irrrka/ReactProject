@@ -5,10 +5,10 @@ const { String, ObjectId } = Schema.Types;
 
 const nominationSchema = new Schema({
     
-    nomination: [{
+    nomination: {
         type: String,
         required: true,
-    }],
+    },
 
     createdBy: {
         type: ObjectId,

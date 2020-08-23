@@ -1,0 +1,14 @@
+.container {
+    word-wrap: break-word;
+    padding: 0.5%;
+    margin-bottom: 5%;
+    margin-right: 5%;
+    width: 33%;
+    display: inline-block;
+    vertical-align: top;
+    border: 1px solid #3a71a8;
+    text-align: center;
+  }
+  .name {
+    text-align: center;
+  }

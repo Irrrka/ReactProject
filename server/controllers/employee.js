@@ -9,12 +9,27 @@ module.exports = {
     },
 
     getDetails: (req, res, next) => {
-        models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('username')
-            .then((employee) => {
-                res.send(employee)
+        models.Employee.findById(req.query.id)
+            .populate('createdBy')
+            .populate({
+                path: 'nominations',
+                populate: {
+                    path: 'createdBy'
+                }
+            })
+            .then(nominations => {
+                res.send(nominations);
             })
             .catch(next);
     },
+
+    // getDetails: (req, res, next) => {
+    //     models.Employee.findById(req.query.id).populate('createdBy', 'username').populate('username')
+    //         .then((employee) => {
+    //             res.send(employee)
+    //         })
+    //         .catch(next);
+    // },
 
     post: (req, res, next) => {
         const {

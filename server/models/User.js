@@ -19,8 +19,7 @@ const userSchema = new Schema({
         require: true
     },
 
-    employees: [{ type: ObjectId, ref: "Employee" }]
-
+    employees: [{ type: ObjectId, ref: "Employee" }],
 });
 
 userSchema.methods = {

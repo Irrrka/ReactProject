@@ -1,33 +1,52 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import Title from '../../../components/title'
 import Container from '../../../components/container'
-import Input from '../../../components/input'
+import Textarea from '../../../components/textarea'
 import Error from '../../../components/error'
 import Button from '../../../components/button'
 import styles from './index.module.css';
 import validate from '../../../utils/validator'
 import getCookie from '../../../utils/cookie'
-import { withRouter } from 'react-router-dom';
+import UserContext from '../../../Context';
+
 
 const NominateEmployeePage = () => {
-    const [error, setError] = useState([]);
-    const [nomination, setNomination] = useState([]);
+    const [employee, setEmployee] = useState(null);
+    const [isCreator, setIsCreator] = useState('');
+    const [error, setError] = useState('');
+    const [nomination, setNomination] = useState('');
+    const [newNomination, setNewNomination] = useState('');
+
+    const context = useContext(UserContext);
     const params = useParams();
     const history = useHistory();
 
-    // const getEmployee = useCallback(async () => {
-    //     const id = params.id;
-    //     const response = await fetch(`http://localhost:9999/api/employee/details/?id=${id}`);
-    //     if (response.status === 500) {
-    //         history.push('/');
-    //     }
-    //     const employee = await response.json();
+    const id = params.id;
 
-    //     setNominations(employee.nominations);
-    // }, [params.id, history]);
+    const getEmployee = useCallback(async () => {
+        const response = await fetch(`http://localhost:9999/api/employee/details?id=${id}`);
 
-    const onSubmit = (e) => {
+        if (!response.ok) {
+            history.push('/error');
+        } else {
+            const employee = await response.json();
+
+            const employeeCreatorId = employee.createdBy._id;
+            const currentUserId = context.user.id;
+            const isCreator = employeeCreatorId === currentUserId;
+
+            setEmployee(employee);
+            setIsCreator(isCreator);
+        }
+    }, [context.user.id, history, id])
+
+    useEffect(() => {
+        getEmployee();
+    }, [getEmployee])
+
+
+    const onSubmit = async (e) => {
         e.preventDefault();
 
         if (nomination === '') {
@@ -35,35 +54,40 @@ const NominateEmployeePage = () => {
             return;
         }
 
-        fetch(`http://localhost:9999/api/employee/nominate/${params.id}`, {
-            method: 'PUT',
+        await fetch('http://localhost:9999/api/nomination', {
+            method: 'POST',
             body: JSON.stringify({
-                nominations:{push:nomination}
+                nomination,
+                employeeId: id
             }),
             headers: {
                 'Content-Type': 'application/json',
-                'Authorizations': getCookie('x-auth-token')
+                'Authorization': getCookie('x-auth-token')
             }
-        }).then(response => {
-            return response.json();
+        }).then(res => {
+            setNomination('');
+            setNewNomination([...newNomination, 1])
         }).then(result => {
-            if (result.status === 400) {
-                setError('Nomination text is required!');
-                return;
-            }
-            history.push(`/details/${params.id}`);
+            history.push(`/`);
         }).catch(e => {
-            setError('Error');
+            console.log('Error: ', e);
         })
     }
 
+
     return (
         <Container>
-            <form className={styles.container} onSubmit={onSubmit}>
                 <Title title="Recognize a colleague!" />
+            <form className={styles.container} onSubmit={onSubmit}>
                 <div className={styles.input}>
-                    <textarea className={styles.input} defaultValue="Recognize your colleague's accomplishments">
-                    </textarea>
+                <Textarea 
+                    value={nomination}
+                    onChange={(e) => {
+                        setNomination(e.target.value);
+                    }}
+                    id='nomination'
+                    placeholder='Recognize your colleagues accomplishments'
+                />
                 </div>
                 { error? <Error key={error} text={error} type="error" /> : null}
                 <div className={styles.submit}>
@@ -74,4 +98,4 @@ const NominateEmployeePage = () => {
     );
 }
 
-export default withRouter(NominateEmployeePage);
+export default NominateEmployeePage;
